@@ -20,9 +20,9 @@ const Character = {
 
 };
 
-// ==========================
+// ======================================
 // SHOW / HIDE CHARACTER
-// ==========================
+// ======================================
 
 Character.show = function () {
 
@@ -40,14 +40,13 @@ Character.hide = function () {
 
 }
 
-// ==========================
+// ======================================
 // SHOW / HIDE BUBBLE
-// ==========================
+// ======================================
 
 Character.showBubble = function () {
 
     this.bubble.style.opacity = "1";
-
     this.bubble.style.visibility = "visible";
 
 }
@@ -55,16 +54,17 @@ Character.showBubble = function () {
 Character.hideBubble = function () {
 
     this.bubble.style.opacity = "0";
-
     this.bubble.style.visibility = "hidden";
 
 }
 
-// ==========================
+// ======================================
 // CHANGE EMOTION
-// ==========================
+// ======================================
 
 Character.changeEmotion = function (emotion) {
+
+    if (!emotion) return;
 
     this.currentEmotion = emotion;
 
@@ -72,33 +72,33 @@ Character.changeEmotion = function (emotion) {
 
 }
 
-// ==========================
+// ======================================
 // CHANGE ANIMATION
-// ==========================
+// ======================================
 
 Character.changeAnimation = function (animation) {
 
     this.image.classList.remove(
 
         "idle",
-
         "bounce",
-
         "shake",
-
         "sleep",
-
         "love"
 
     );
 
-    this.image.classList.add(animation);
+    if (animation) {
+
+        this.image.classList.add(animation);
+
+    }
 
 }
 
-// ==========================
+// ======================================
 // TYPING EFFECT
-// ==========================
+// ======================================
 
 Character.typeText = function (text, speed = 35) {
 
@@ -124,9 +124,10 @@ Character.typeText = function (text, speed = 35) {
 
 }
 
-// ==========================
-// TALK
-// ==========================
+// ======================================
+// ONE TIME TALK
+// Bubble muncul → Typing → Bubble hilang
+// ======================================
 
 Character.talk = function ({
 
@@ -140,13 +141,13 @@ Character.talk = function ({
 
 }) {
 
+    clearTimeout(this.timer);
+
     this.changeEmotion(emotion);
 
     this.showBubble();
 
     this.typeText(message, speed);
-
-    clearTimeout(this.timer);
 
     this.timer = setTimeout(() => {
 
@@ -156,15 +157,89 @@ Character.talk = function ({
 
 }
 
+// ======================================
+// START CONVERSATION
+// Bubble tetap terbuka
+// ======================================
+
+Character.startConversation = function ({
+
+    emotion,
+
+    message,
+
+    speed = 35
+
+}) {
+
+    clearTimeout(this.timer);
+
+    this.changeEmotion(emotion);
+
+    this.showBubble();
+
+    this.typeText(message, speed);
+
+}
+
+// ======================================
+// UPDATE CONVERSATION
+// Bubble tidak ditutup
+// ======================================
+
+Character.update = function ({
+
+    emotion,
+
+    message,
+
+    speed = 35
+
+}) {
+
+    clearTimeout(this.timer);
+
+    this.changeEmotion(emotion);
+
+    this.typeText(message, speed);
+
+}
+
+// ======================================
+// END CONVERSATION
+// ======================================
+
+Character.endConversation = function (duration = 0) {
+
+    clearTimeout(this.timer);
+
+    if (duration <= 0) {
+
+        this.hideBubble();
+
+        return;
+
+    }
+
+    this.timer = setTimeout(() => {
+
+        this.hideBubble();
+
+    }, duration);
+
+}
+
+// ======================================
+// DEFAULT
+// ======================================
+
 window.addEventListener("DOMContentLoaded", () => {
 
-    Character.talk({
+    Character.startConversation({
 
-        emotion: "wave",
+        emotion: "happy",
 
-        message: "Haiii! Aku Mochi 🐱 Yuk, login dulu yaa ❤️",
-
-        duration: 5000
+        message: "...."
 
     });
 
