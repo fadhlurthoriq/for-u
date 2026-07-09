@@ -244,24 +244,6 @@ CONTAINER
 
 /*==========================
 
-SCENE
-
-==========================*/
-
-.scene{
-
-    min-height:100vh;
-
-    display:flex;
-
-    align-items:center;
-
-    position:relative;
-
-}
-
-/*==========================
-
 FLOATING
 
 ==========================*/
@@ -478,25 +460,75 @@ LOGIN
 
 }
 
-.login-card input{
+.input-group{
 
-    padding:15px 18px;
+    position:relative;
 
-    border:none;
-
-    border-radius:14px;
-
-    background:white;
-
-    outline:none;
-
-    font-size:15px;
+    margin-top:10px;
 
 }
 
-.login-card input:focus{
+.input-group input{
 
-    box-shadow:0 0 0 3px rgba(255,141,161,.25);
+    width:100%;
+
+    height:58px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:16px;
+
+    padding:22px 18px 8px;
+
+    font-size:15px;
+
+    background:white;
+
+    transition:.3s;
+
+    color:var(--text);
+
+}
+
+.input-group label{
+
+    position:absolute;
+
+    left:18px;
+
+    top:18px;
+
+    color:#999;
+
+    transition:.25s;
+
+    pointer-events:none;
+
+    background:white;
+
+    padding:0 5px;
+
+}
+
+.input-group input:focus{
+
+    box-shadow:0 0 0 3px rgba(255,141,161,.2);
+
+}
+
+.input-group input:focus+label,
+
+.input-group input:not(:placeholder-shown)+label,
+
+.input-group input:valid+label{
+
+    top:-10px;
+
+    font-size:12px;
+
+    color:var(--accent);
 
 }
 
@@ -525,5 +557,159 @@ LOGIN
 #login-btn:hover{
 
     transform:translateY(-3px);
+
+}
+
+/*========================
+
+Typing Indicator
+
+========================*/
+
+#bubble-content{
+
+    min-height:26px;
+
+}
+
+#typing-indicator{
+
+    display:none;
+
+    align-items:center;
+
+    gap:6px;
+
+    height:24px;
+
+}
+
+#typing-indicator span{
+
+    width:8px;
+
+    height:8px;
+
+    border-radius:50%;
+
+    background:var(--text-light);
+
+    animation:typing .8s infinite;
+
+}
+
+#typing-indicator span:nth-child(2){
+
+    animation-delay:.15s;
+
+}
+
+#typing-indicator span:nth-child(3){
+
+    animation-delay:.3s;
+
+}
+
+@keyframes typing{
+
+    0%,80%,100%{
+
+        transform:translateY(0);
+
+        opacity:.4;
+
+    }
+
+    40%{
+
+        transform:translateY(-6px);
+
+        opacity:1;
+
+    }
+
+}
+
+/*==========================
+SCENE ENGINE
+==========================*/
+
+.scene{
+
+    min-height:100vh;
+
+    width:100%;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+.scene.active{
+
+    display:flex;
+
+    animation:fadeScene .8s ease;
+
+}
+
+@keyframes fadeScene{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+body{
+
+    transition:
+
+        filter .7s ease,
+
+        opacity .7s ease;
+
+}
+
+body.transition{
+
+    overflow:hidden;
+
+}
+
+#login-card{
+
+    transition:
+
+        opacity .8s,
+
+        transform .8s;
+
+}
+
+#login-card.hide{
+
+    opacity:0;
+
+    transform:
+
+        translateY(-40px)
+
+        scale(.95);
 
 }

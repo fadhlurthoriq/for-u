@@ -1,126 +1,168 @@
+const Login = {}
 const usernameInput = document.getElementById("username");
 const passwordInput = document.getElementById("password");
 const loginButton = document.getElementById("login-btn");
+let usernameDebounce;
+let passwordDebounce;
 
-const LOGIN_DATA = {
+Login.init = function () {
 
-    username: "neysilla dwi carollina",
+    usernameInput.addEventListener("input",()=>{
+    
+        Character.resetIdle();
+    
+        Character.changeEmotion("thinking");
+    
+        Character.showTyping();
+    
+        clearTimeout(usernameDebounce);
+    
+        usernameDebounce=setTimeout(()=>{
+            Character.hideTyping();
+    
+            const value=usernameInput.value.trim();
+    
+            if(value===CONFIG.login.username){
+    
+                Character.say({
+    
+                    emotion:"love",
+    
+                    message:"Iyaaa ❤️ itu nama kamu."
+    
+                });
+    
+            }
+    
+            else{
+    
+                Character.say({
+    
+                    emotion:"angry",
+    
+                    message:"Heii kamu siapaa, itu bukan nama cewe akuu!!"
+    
+                });
+    
+            }
+    
+        },2000);
+    
+    });
+    
+    passwordInput.addEventListener("input",()=>{
 
-    password: "27112025"
+        Character.resetIdle();
 
-};
+        Character.changeEmotion("thinking");
 
-usernameInput.addEventListener("input",()=>{
+        Character.showTyping();
 
-    const value=usernameInput.value.trim();
+        clearTimeout(passwordDebounce);
 
-    if(value===""){
+        passwordDebounce = setTimeout(()=>{
 
-        Character.talk({
+            Character.hideTyping();
 
-            emotion:"hopeful",
+            const value = passwordInput.value.trim();
 
-            message:"...."
+            if(value === CONFIG.login.password){
 
-        });
+                Character.say({
 
-        return;
+                    emotion:"love",
 
-    }
+                    message:"Yeyyy ❤️"
 
-    if(value===LOGIN_DATA.username){
+                });
 
-        Character.talk({
+            }
 
-            emotion:"love",
+            else{
 
-            message:"Iyaaa ❤️ itu nama kamu."
+                Character.say({
 
-        });
+                    emotion:"cry",
 
-    }
+                    message:"Kamuu lupa yaah 🥺"
 
-    else{
+                });
 
-        Character.talk({
+            }
 
-            emotion:"thinking",
+        },2000);
 
-            message:"Hmm... kayaknya belum benar deh."
-
-        });
-
-    }
-
-});
-
-passwordInput.addEventListener("input",()=>{
-
-    const value=passwordInput.value.trim();
-
-    if(value===""){
-
-        Character.talk({
-
-            emotion:"thinking",
-
-            message:"Aku tunggu tanggalnya yaa."
-
-        });
-
-        return;
-
-    }
-
-    if(value===LOGIN_DATA.password){
-
-        Character.talk({
-
+    });
+    
+    usernameInput.addEventListener("focus",()=>{
+    
+        Character.resetIdle();
+    
+        Character.say({
+    
             emotion:"happy",
-
-            message:"Yeyyy! Benar ❤️"
-
+    
+            message:"Aku tunggu nama kamu yaa ❤️"
+    
         });
-
-    }
-
-    else{
-
-        Character.talk({
-
-            emotion:"angry",
-
-            message:"Masih belum tepat 🥺"
-
+    
+    });
+    
+    passwordInput.addEventListener("focus",()=>{
+    
+        Character.resetIdle();
+    
+        Character.say({
+    
+            emotion:"thinking",
+    
+            message:"Sekarang tanggal pertama kita bertemu 🤍"
+    
         });
+    
+    });
+    
+    usernameInput.addEventListener("blur",()=>{
+    
+        Character.say({
+    
+            emotion:"happy",
+    
+            message:"...."
+    
+        });
+    
+    });
+    
+    passwordInput.addEventListener("blur",()=>{
+    
+        Character.say({
+    
+            emotion:"happy",
+    
+            message:"...."
+    
+        });
+    
+    });
 
-    }
+    loginButton.addEventListener("click", () => {
 
-});
-
-usernameInput.addEventListener("focus",()=>{
-
-    Character.talk({
-
-        emotion:"happy",
-
-        message:"Aku tunggu nama kamu yaa ❤️"
+        login();
 
     });
 
-});
+    document.addEventListener("keydown",(e)=>{
 
-passwordInput.addEventListener("focus",()=>{
+        if(e.key==="Enter"){
 
-    Character.talk({
+            login();
 
-        emotion:"thinking",
-
-        message:"Sekarang tanggal pertama kita bertemu 🤍"
+        }
 
     });
 
-});
+}
 
 function login(){
 
@@ -128,9 +170,9 @@ function login(){
 
     const password=passwordInput.value.trim();
 
-    if(username!==LOGIN_DATA.username){
+    if(username!==CONFIG.login.username){
 
-        Character.talk({
+        Character.say({
 
             emotion:"thinking",
 
@@ -144,9 +186,9 @@ function login(){
 
     }
 
-    if(password!==LOGIN_DATA.password){
+    if(password!==CONFIG.login.password){
 
-        Character.talk({
+        Character.say({
 
             emotion:"sad",
 
@@ -160,7 +202,7 @@ function login(){
 
     }
 
-    Character.talk({
+    Character.say({
 
         emotion:"love",
 
@@ -168,17 +210,17 @@ function login(){
 
     });
 
-    // nanti Phase 5C
-}
+    Character.say({
 
-loginButton.addEventListener("click", login);
+        emotion:"excited",
 
-document.addEventListener("keydown", (e) => {
+        message:"Yeyyy ❤️ Selamat datang."
 
-    if (e.key === "Enter") {
+    });
 
-        login();
+    setTimeout(()=>{
 
+        Scene.transition("welcome-scene");
+
+    },1500);
     }
-
-});

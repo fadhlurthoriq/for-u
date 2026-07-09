@@ -1,6 +1,23 @@
-console.clear();
+const App = {};
 
-console.log("%cFOR U ❤️",
-"font-size:30px;color:#FF5C7A;font-weight:bold;");
+App.init = function(){
 
-console.log("Foundation Loaded");
+    Character.init();
+
+    Login.init();
+
+    Scene.init();
+
+}
+
+window.addEventListener(
+
+    "DOMContentLoaded",
+
+    ()=>{
+
+        App.init();
+
+    }
+
+);

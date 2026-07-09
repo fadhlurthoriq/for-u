@@ -12,23 +12,19 @@
 
     <!-- FONT -->
 
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
     <!-- CSS -->
 
-    <link rel="stylesheet"
-          href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 
-    <link rel="stylesheet"
-          href="assets/css/animations.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+
+    <link rel="stylesheet" href="assets/css/popup.css">
 
 </head>
 
@@ -58,9 +54,19 @@
 
             <div id="character-bubble">
 
-                <div id="bubble-text">
+                <div id="bubble-content">
 
-                    Haiii ❤️
+                    <div id="bubble-text"></div>
+
+                    <div id="typing-indicator">
+
+                        <span></span>
+
+                        <span></span>
+
+                        <span></span>
+
+                    </div>
 
                 </div>
 
@@ -117,28 +123,50 @@
     </div>
 
     <main id="story">
-        <section id="login-scene" class="scene">
+        <section id="login-scene" class="scene active">
             <div class="container">
 
                 <div class="login-layout">
 
-                    <div class="login-card glass-card">
+                    <div class="login-card glass-card" id="login-card">
 
-                        <h1>For You ❤️</h1>
+                        <h1>Helloo ❤️</h1>
 
                         <p>
                             Selamat datang di tempat kecil yang aku buat khusus untukmu.
                         </p>
 
-                        <input
-                            id="username"
-                            type="text"
-                            placeholder="Masukkan nama kamu">
+                        <div class="input-group">
 
-                        <input
-                            id="password"
-                            type="password"
-                            placeholder="Tanggal pertama kita bertemu">
+                            <input
+                                id="username"
+                                placeholder=" "
+                                type="text"
+                                required>
+
+                            <label for="username">
+
+                                Nama Kamu
+
+                            </label>
+
+                        </div>
+
+                        <div class="input-group">
+
+                            <input
+                                id="password"
+                                placeholder=" "
+                                type="password"
+                                required>
+
+                            <label for="password">
+
+                                Tanggal Awal Kenal
+
+                            </label>
+
+                        </div>
 
                         <button id="login-btn">
 
@@ -154,7 +182,19 @@
         </section>
 
         <section id="welcome-scene" class="scene">
-            <div class="container"></div>
+
+            <div class="container">
+
+                <div class="glass-card" style=" width:700px; padding:70px; margin:auto; text-align:center;">
+
+                    <h1> Welcome ❤️ </h1>
+
+                    <p> Lorem Ipsum </p>
+
+                </div>
+
+            </div>
+
         </section>
 
         <section id="gallery-scene" class="scene">
@@ -175,8 +215,56 @@
 
     </main>
 
-    <script src="assets/js/character.js"></script>
-    <script src="assets/js/login.js"></script>
+    <!-- ===================================
+    POPUP ENGINE
+    =================================== -->
+
+    <div id="popup-overlay">
+
+        <div id="popup-card" class="glass-card">
+
+            <img
+
+                id="popup-character"
+
+                src="assets/emoji/mochi/happy.png"
+
+                alt="Mochi">
+
+            <h2 id="popup-title">
+
+                Judul
+
+            </h2>
+
+            <p id="popup-message">
+
+                Lorem ipsum dolor sit amet.
+
+            </p>
+
+            <button id="popup-button">
+
+                Oke ❤️
+
+            </button>
+
+        </div>
+
+    </div>
+
+<script src="assets/js/config.js"></script>
+
+<script src="assets/js/character.js"></script>
+
+<script src="assets/js/popup.js"></script>
+
+<script src="assets/js/scene.js"></script>
+
+<script src="assets/js/login.js"></script>
+
+<script src="assets/js/app.js"></script>
+
 </body>
 
 </html>

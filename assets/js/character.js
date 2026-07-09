@@ -12,11 +12,15 @@ const Character = {
 
     typingTimer: null,
 
+    isTalking:false,
+
     bubble: document.getElementById("character-bubble"),
 
     text: document.getElementById("bubble-text"),
 
-    image: document.getElementById("character-image")
+    image: document.getElementById("character-image"),
+
+    typing: document.getElementById("typing-indicator"),
 
 };
 
@@ -37,6 +41,26 @@ Character.hide = function () {
     this.image.style.display = "none";
 
     this.visible = false;
+
+}
+
+Character.showTyping=function(){
+
+    clearTimeout(this.timer);
+
+    this.showBubble();
+
+    this.text.style.display="none";
+
+    this.typing.style.display="flex";
+
+}
+
+Character.hideTyping=function(){
+
+    this.typing.style.display="none";
+
+    this.text.style.display="block";
 
 }
 
@@ -100,132 +124,123 @@ Character.changeAnimation = function (animation) {
 // TYPING EFFECT
 // ======================================
 
-Character.typeText = function (text, speed = 35) {
+Character.typeText = function(text, speed = 35){
 
     clearInterval(this.typingTimer);
 
-    this.text.innerHTML = "";
+    this.text.innerHTML="";
 
-    let i = 0;
+    let i=0;
 
-    this.typingTimer = setInterval(() => {
+    this.typingTimer=setInterval(()=>{
 
-        this.text.innerHTML += text.charAt(i);
+        if(i<text.length){
 
-        i++;
+            this.text.innerHTML+=text.charAt(i);
 
-        if (i >= text.length) {
+            i++;
+
+        }else{
 
             clearInterval(this.typingTimer);
 
         }
 
-    }, speed);
+    },speed);
 
 }
 
-// ======================================
-// ONE TIME TALK
-// Bubble muncul → Typing → Bubble hilang
-// ======================================
+Character.say = function({
 
-Character.talk = function ({
+    emotion = this.currentEmotion,
 
-    emotion,
+    message = "",
 
-    message,
+    speed = 35,
 
-    duration = 3000,
+    duration = null
 
-    speed = 35
-
-}) {
+}){
 
     clearTimeout(this.timer);
-
-    this.changeEmotion(emotion);
 
     this.showBubble();
 
-    this.typeText(message, speed);
-
-    this.timer = setTimeout(() => {
-
-        this.hideBubble();
-
-    }, duration);
-
-}
-
-// ======================================
-// START CONVERSATION
-// Bubble tetap terbuka
-// ======================================
-
-Character.startConversation = function ({
-
-    emotion,
-
-    message,
-
-    speed = 35
-
-}) {
-
-    clearTimeout(this.timer);
-
     this.changeEmotion(emotion);
 
-    this.showBubble();
+    this.typeText(message,speed);
 
-    this.typeText(message, speed);
+    if(duration!==null){
 
-}
+        this.timer=setTimeout(()=>{
 
-// ======================================
-// UPDATE CONVERSATION
-// Bubble tidak ditutup
-// ======================================
+            this.hideBubble();
 
-Character.update = function ({
-
-    emotion,
-
-    message,
-
-    speed = 35
-
-}) {
-
-    clearTimeout(this.timer);
-
-    this.changeEmotion(emotion);
-
-    this.typeText(message, speed);
-
-}
-
-// ======================================
-// END CONVERSATION
-// ======================================
-
-Character.endConversation = function (duration = 0) {
-
-    clearTimeout(this.timer);
-
-    if (duration <= 0) {
-
-        this.hideBubble();
-
-        return;
+        },duration);
 
     }
 
-    this.timer = setTimeout(() => {
+}
 
-        this.hideBubble();
+// ======================================
+// IDLE MESSAGE
+// ======================================
 
-    }, duration);
+Character.idleMessages = [
+
+    "....",
+
+    "Hehe~ 🐱",
+
+    "Aku tunggu yaa ❤️",
+
+    "Hmm...",
+
+    "♪ ♪ ♪",
+
+    "Jangan lama-lama yaa 🥺",
+
+    "Hari ini kamu cantik banget ❤️",
+
+    "Aku penasaran nih...",
+
+    "(｡•ᴗ•｡)",
+
+    "Semangat yaa ✨"
+
+];
+
+Character.idleTimer = null;
+
+Character.startIdle = function(){
+
+    clearTimeout(this.idleTimer);
+
+    this.idleTimer = setTimeout(() => {
+
+        const randomMessage = this.idleMessages[
+            Math.floor(Math.random() * this.idleMessages.length)
+        ];
+
+        this.say({
+
+            emotion:"happy",
+
+            message:randomMessage
+
+        });
+
+        this.startIdle();
+
+    },10000);
+
+}
+
+Character.resetIdle = function(){
+
+    clearTimeout(this.idleTimer);
+
+    this.startIdle();
 
 }
 
@@ -233,14 +248,22 @@ Character.endConversation = function (duration = 0) {
 // DEFAULT
 // ======================================
 
-window.addEventListener("DOMContentLoaded", () => {
+Character.init=function(){
 
-    Character.startConversation({
+    this.say({
 
-        emotion: "happy",
+        emotion:"waving",
 
-        message: "...."
+        message:"Haiii! Kenalin aku Mochi 🐱❤️ Aku yang nemenin kamu disini gantiin thoriq sementara yaah...",
+
+        duration:6000
 
     });
 
-});
+    setTimeout(()=>{
+
+        this.startIdle();
+
+    },6000);
+
+}
