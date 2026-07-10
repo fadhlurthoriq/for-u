@@ -1,16 +1,20 @@
 const Character = {
 
-    name: "Mochi",
+    name:"Mochi",
 
-    currentEmotion: "happy",
+    mode:"idle",
 
-    currentAnimation: "idle",
+    currentEmotion:"happy",
 
-    visible: true,
+    currentAnimation:"idle",
 
-    timer: null,
+    visible:true,
 
-    typingTimer: null,
+    timer:null,
+
+    typingTimer:null,
+
+    idleTimer:null,
 
     isTalking:false,
 
@@ -79,6 +83,32 @@ Character.hideBubble = function () {
 
     this.bubble.style.opacity = "0";
     this.bubble.style.visibility = "hidden";
+
+}
+
+// ======================================
+// MODE
+// ======================================
+
+Character.startCutscene=function(){
+
+    this.mode="cutscene";
+
+    this.stopIdle();
+
+}
+
+Character.finishCutscene=function(){
+
+    this.mode="idle";
+
+    this.startIdle();
+
+}
+
+Character.stopIdle=function(){
+
+    clearTimeout(this.idleTimer);
 
 }
 
@@ -212,21 +242,43 @@ Character.idleMessages = [
 
 Character.idleTimer = null;
 
-Character.startIdle = function(){
+Character.startIdle=function(){
+
+    if(this.mode!=="idle"){
+
+        return;
+
+    }
 
     clearTimeout(this.idleTimer);
 
-    this.idleTimer = setTimeout(() => {
+    this.idleTimer=setTimeout(()=>{
 
-        const randomMessage = this.idleMessages[
-            Math.floor(Math.random() * this.idleMessages.length)
+        if(this.mode!=="idle"){
+
+            return;
+
+        }
+
+        const random=
+
+        this.idleMessages[
+
+            Math.floor(
+
+                Math.random()*
+
+                this.idleMessages.length
+
+            )
+
         ];
 
         this.say({
 
             emotion:"happy",
 
-            message:randomMessage
+            message:random
 
         });
 
@@ -236,9 +288,9 @@ Character.startIdle = function(){
 
 }
 
-Character.resetIdle = function(){
+Character.resetIdle=function(){
 
-    clearTimeout(this.idleTimer);
+    this.stopIdle();
 
     this.startIdle();
 

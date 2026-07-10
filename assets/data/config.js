@@ -1,7 +1,0 @@
-const Config={
-
-username:"",
-
-password:""
-
-}

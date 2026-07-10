@@ -44,6 +44,8 @@
 
     </div>
 
+    <div id="focus-overlay"></div>
+
     <!-- ===========================
             CHARACTER LAYER
     =========================== -->
@@ -123,12 +125,25 @@
     </div>
 
     <main id="story">
+
+        <div id="transition-overlay">
+
+            <div class="transition-text">
+
+                <h2 id="transition-title"></h2>
+
+                <p id="transition-subtitle"></p>
+
+            </div>
+
+        </div>
+
         <section id="login-scene" class="scene active">
             <div class="container">
 
                 <div class="login-layout">
 
-                    <div class="login-card glass-card" id="login-card">
+                    <div id="login-card" class="login-card glass-card">
 
                         <h1>Helloo ❤️</h1>
 
@@ -183,13 +198,38 @@
 
         <section id="welcome-scene" class="scene">
 
-            <div class="container">
+            <div id="welcome-wrapper">
 
-                <div class="glass-card" style=" width:700px; padding:70px; margin:auto; text-align:center;">
+                <div id="envelope-stage">
 
-                    <h1> Welcome ❤️ </h1>
+                    <img
+                        id="letter"
+                        src="assets/img/envelope/letter.png"
+                    >
 
-                    <p> Lorem Ipsum </p>
+                    <img
+                        id="envelope"
+                        src="assets/img/envelope/closed.png"
+                    >
+
+                </div>
+
+                <div id="welcome-card" class="glass-card">
+
+                    <img
+                        id="card-letter"
+                        src="assets/img/envelope/hover.png"
+                        alt="">
+
+                    <h1>Untuk Kamu ❤️</h1>
+
+                    <p>
+                        Ada sesuatu yang ingin aku tunjukkan...
+                    </p>
+
+                    <button id="start-story">
+                        Mulai Perjalanan ❤️
+                    </button>
 
                 </div>
 
@@ -253,6 +293,16 @@
 
     </div>
 
+<script src="assets/data/dialogs.js"></script>
+
+<script src="assets/data/stories.js"></script>
+
+<script src="assets/data/gallery.js"></script>
+
+<script src="assets/data/popup.js"></script>
+
+<script src="assets/data/playlist.js"></script>
+
 <script src="assets/js/config.js"></script>
 
 <script src="assets/js/character.js"></script>
@@ -260,6 +310,10 @@
 <script src="assets/js/popup.js"></script>
 
 <script src="assets/js/scene.js"></script>
+
+<script src="assets/js/storage.js"></script>
+
+<script src="assets/js/envelope.js"></script>
 
 <script src="assets/js/login.js"></script>
 

@@ -1,8 +1,10 @@
 const App = {};
 
-App.init = function(){
+App.init=function(){
 
     Character.init();
+
+    Envelope.init();
 
     Login.init();
 

@@ -1,1 +1,3 @@
-const Gallery=[]
+const Gallery = [
+
+];

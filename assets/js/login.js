@@ -212,15 +212,27 @@ function login(){
 
     Character.say({
 
-        emotion:"excited",
+        emotion:"love",
 
-        message:"Yeyyy ❤️ Selamat datang."
+        message:"Yeyyy!! ❤️ Aku seneng banget kamu berhasil login!!"
 
     });
 
+    Character.changeAnimation(
+
+        "bounce"
+
+    );
+
     setTimeout(()=>{
 
-        Scene.transition("welcome-scene");
+        document.querySelector(".login-card").classList.add("login-success");
+
+        Scene.cinematic(
+
+            "welcome-scene"
+
+        );
 
     },1500);
     }
