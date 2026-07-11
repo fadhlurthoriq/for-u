@@ -24,25 +24,13 @@ Login.init = function () {
     
             if(value===CONFIG.login.username){
     
-                Character.say({
-    
-                    emotion:"love",
-    
-                    message:"Iyaaa ❤️ itu nama kamu."
-    
-                });
+                Character.dialog("login.usernameCorrect");
     
             }
     
             else{
     
-                Character.say({
-    
-                    emotion:"angry",
-    
-                    message:"Heii kamu siapaa, itu bukan nama cewe akuu!!"
-    
-                });
+                Character.dialog("login.usernameWrong");
     
             }
     
@@ -68,25 +56,13 @@ Login.init = function () {
 
             if(value === CONFIG.login.password){
 
-                Character.say({
-
-                    emotion:"love",
-
-                    message:"Yeyyy ❤️"
-
-                });
+                Character.dialog("login.passwordCorrect");
 
             }
 
             else{
 
-                Character.say({
-
-                    emotion:"cry",
-
-                    message:"Kamuu lupa yaah 🥺"
-
-                });
+                Character.dialog("login.passwordWrong");
 
             }
 
@@ -98,13 +74,7 @@ Login.init = function () {
     
         Character.resetIdle();
     
-        Character.say({
-    
-            emotion:"happy",
-    
-            message:"Aku tunggu nama kamu yaa ❤️"
-    
-        });
+        Character.dialog("login.focusUsername");
     
     });
     
@@ -112,37 +82,7 @@ Login.init = function () {
     
         Character.resetIdle();
     
-        Character.say({
-    
-            emotion:"thinking",
-    
-            message:"Sekarang tanggal pertama kita bertemu 🤍"
-    
-        });
-    
-    });
-    
-    usernameInput.addEventListener("blur",()=>{
-    
-        Character.say({
-    
-            emotion:"happy",
-    
-            message:"...."
-    
-        });
-    
-    });
-    
-    passwordInput.addEventListener("blur",()=>{
-    
-        Character.say({
-    
-            emotion:"happy",
-    
-            message:"...."
-    
-        });
+        Character.dialog("login.focusPassword");
     
     });
 
@@ -170,53 +110,9 @@ function login(){
 
     const password=passwordInput.value.trim();
 
-    if(username!==CONFIG.login.username){
+    if(username===CONFIG.login.username && password===CONFIG.login.password){
 
-        Character.say({
-
-            emotion:"thinking",
-
-            message:"Nama kamu masih belum cocok."
-
-        });
-
-        usernameInput.focus();
-
-        return;
-
-    }
-
-    if(password!==CONFIG.login.password){
-
-        Character.say({
-
-            emotion:"sad",
-
-            message:"Tanggalnya masih belum benar."
-
-        });
-
-        passwordInput.focus();
-
-        return;
-
-    }
-
-    Character.say({
-
-        emotion:"love",
-
-        message:"Yeyyy ❤️ Selamat datang."
-
-    });
-
-    Character.say({
-
-        emotion:"love",
-
-        message:"Yeyyy!! ❤️ Aku seneng banget kamu berhasil login!!"
-
-    });
+        Character.dialog("login.loginSuccess");
 
     Character.changeAnimation(
 
@@ -235,4 +131,4 @@ function login(){
         );
 
     },1500);
-    }
+}}

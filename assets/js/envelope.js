@@ -48,11 +48,7 @@ Envelope.finishOpen = function () {
 
   this.envelope.src = "assets/img/envelope/opened.png";
 
-  Character.say({
-    emotion: "love",
-
-    message: "Taraaa ❤️",
-  });
+  Character.dialog("envelope.intro");
 
   this.envelope.classList.add("envelope-hide");
 
@@ -86,11 +82,7 @@ Envelope.peek = function () {
 
   this.envelope.src = "assets/img/envelope/peek_letter.png";
 
-  Character.say({
-    emotion: "thinking",
-
-    message: "Hehe... ❤️",
-  });
+  Character.dialog("envelope.mid")
 
   setTimeout(() => {
     this.open();
@@ -126,10 +118,7 @@ Envelope.showLetter = function () {
 Envelope.showCard = function () {
   console.log("Envelope.showCard -> running");
 
-  const focusOverlay = document.getElementById("focus-overlay");
-  if (focusOverlay) {
-    focusOverlay.classList.add("show");
-  }
+  Overlay.showFocus();
 
   this.letter.classList.add("letter-fade-out");
 
@@ -137,6 +126,7 @@ Envelope.showCard = function () {
     this.card.classList.add("card-show");
     this.card.style.opacity = "1";
     this.card.style.pointerEvents = "auto";
+    this.bindCard();
   } else {
     console.warn("Envelope.showCard -> card element missing");
   }
@@ -156,10 +146,7 @@ Envelope.showCard = function () {
     }, 500);
   }
 
-  Character.say({
-    emotion: "love",
-    message: "Aku bikin ini khusus buat kamu ❤️",
-  });
+  Character.dialog("envelope.end")
 
   this.state = "finished";
 };
@@ -180,6 +167,24 @@ Envelope.start = function () {
   this.bind();
 };
 
+Envelope.bindCard = function(){
+
+    const btn = document.getElementById("start-story");
+
+    if(!btn) return;
+
+    btn.addEventListener(
+        "click",
+        ()=>{
+            Journey.start();
+        },
+        {
+            once:true
+        }
+    );
+
+}
+
 Envelope.reset = function () {
   this.state = "idle";
   this.opened = false;
@@ -199,8 +204,5 @@ Envelope.reset = function () {
     this.cardLetter.className = "";
   }
 
-  const focusOverlay = document.getElementById("focus-overlay");
-  if (focusOverlay) {
-    focusOverlay.classList.remove("show");
-  }
+  Overlay.hideFocus();
 };

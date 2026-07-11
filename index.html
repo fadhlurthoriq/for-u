@@ -8,7 +8,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>❤️ For U</title>
+    <title>❤️ for u</title>
 
     <!-- FONT -->
 
@@ -45,6 +45,8 @@
     </div>
 
     <div id="focus-overlay"></div>
+
+    <div id="focus-overlay-journey"></div>
 
     <!-- ===========================
             CHARACTER LAYER
@@ -127,6 +129,26 @@
     <main id="story">
 
         <div id="transition-overlay">
+
+            <div id="journey-transition">
+
+                <div class="journey-content">
+
+                    <h1 id="journey-title">
+
+                        Perjalanan Kita Dimulai ❤️
+
+                    </h1>
+
+                    <p id="journey-subtitle">
+
+                        Aku sudah menyiapkan sesuatu spesial...
+
+                    </p>
+
+                </div>
+
+            </div>
 
             <div class="transition-text">
 
@@ -238,8 +260,99 @@
         </section>
 
         <section id="gallery-scene" class="scene">
-            <div class="container"></div>
+
+            <div id="gallery-container">
+
+                <button
+                    id="gallery-prev"
+                    class="gallery-arrow">
+
+                    ❮
+
+                </button>
+
+                <div id="gallery-viewport">
+
+                    <div id="gallery-track">
+
+                    </div>
+
+                </div>
+
+                <button
+                    id="gallery-next"
+                    class="gallery-arrow">
+
+                    ❯
+
+                </button>
+
+            </div>
+
+            <div id="gallery-progress">
+
+                <span id="gallery-current">
+
+                    1
+
+                </span>
+
+                /
+
+                <span id="gallery-total">
+
+                    1
+
+                </span>
+
+            </div>
+
         </section>
+
+        <div id="gallery-popup">
+
+            <div id="gallery-popup-card">
+
+                <button id="gallery-popup-close">
+                    ✕
+                </button>
+
+                <div class="gallery-popup-left">
+
+                    <img
+                        id="gallery-popup-image"
+                        src=""
+                        alt="">
+
+                </div>
+
+                <div class="gallery-popup-right">
+
+                    <div class="gallery-popup-story">
+
+                        <h2 id="gallery-popup-title"></h2>
+
+                        <p id="gallery-popup-date"></p>
+
+                        <div id="gallery-popup-memory"></div>
+
+                    </div>
+
+                    <div class="gallery-popup-mochi">
+
+                        <img
+                            id="gallery-popup-mochi-image"
+                            src="assets/emoji/mochi/happy.png">
+
+                        <div id="gallery-popup-mochi-bubble"></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
 
         <section id="letter-scene" class="scene">
             <div class="container"></div>
@@ -307,17 +420,59 @@
 
 <script src="assets/js/character.js"></script>
 
+<script src="assets/js/overlay.js"></script>
+
 <script src="assets/js/popup.js"></script>
 
 <script src="assets/js/scene.js"></script>
 
 <script src="assets/js/storage.js"></script>
 
+<script src="js/data/gallery-dialog.js"></script>
+
+<script src="assets/js/gallery-character.js"></script>
+
 <script src="assets/js/envelope.js"></script>
+
+<script src="assets/js/gallery.js"></script>
+
+<script src="assets/js/journey.js"></script>
 
 <script src="assets/js/login.js"></script>
 
+<script src="assets/js/music.js"></script>
+
+<script src="assets/js/popup-character.js"></script>
+
 <script src="assets/js/app.js"></script>
+
+<div id="music-player">
+
+    <div class="player-cover">
+
+        🎵
+
+    </div>
+
+    <div class="player-info">
+
+        <h3 id="player-title">
+            Our Song
+        </h3>
+
+        <p id="player-artist">
+            For You ❤️
+        </p>
+
+    </div>
+
+    <div class="player-control">
+
+        ⏸
+
+    </div>
+
+</div>
 
 </body>
 

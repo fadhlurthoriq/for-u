@@ -1,3 +1,27 @@
-const Gallery = [
+const GalleryData=[
+
+{
+
+    image:"assets/img/gallery/2.jpeg",
+
+    sticker:"heart"
+
+},
+
+{
+
+    image:"assets/img/gallery/3.jpg",
+
+    sticker:"flower"
+
+},
+
+{
+
+    image:"assets/img/gallery/1.png",
+
+    sticker:"flower"
+
+}
 
 ];

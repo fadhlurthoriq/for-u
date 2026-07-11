@@ -2,34 +2,190 @@ const Dialogs = {
 
     login:{
 
-        intro:
-        "Haiii ❤️ Aku Mochi. Selamat datang yaa.",
+        intro:{
+            emotion:"waving",
+            message:"Haiii! Kenalin aku Mochi 🐱❤️ Aku yang nemenin kamu disini gantiin thoriq sementara yaah...",
+            duration:6000
+        },
 
-        usernameCorrect:
-        "Iyaaa ❤️ itu nama kamu.",
+        focusUsername:{
+            emotion:"happy",
+            message:"Aku tunggu nama kamu yaa ❤️"
+        },
 
-        usernameWrong:
-        "Heii itu bukan nama cewe akuu 😤",
+        focusPassword:{
+            emotion:"thinking",
+            message:"Sekarang tanggal pertama kita bertemu 🤍"
+        },
 
-        passwordCorrect:
-        "Yeyyy ❤️ kamu masih ingat.",
+        usernameCorrect:{
+            emotion:"love",
+            message:"Iyaaa ❤️ itu nama kamu."
+        },
 
-        passwordWrong:
-        "Hmmm... coba diingat lagi yaa 🥺"
+        usernameWrong:{
+            emotion:"angry",
+            message:"Heii itu bukan nama cewe akuu 😤"
+        },
+
+        passwordCorrect:{
+            emotion:"love",
+            message:"Yeyyy ❤️ kamu masih ingat."
+        },
+
+        passwordWrong:{
+            emotion:"cry",
+            message:"Hmmm... coba diingat lagi yaa 🥺"
+        },
+
+        loginSuccess:{
+            emotion:"love",
+            message:"Yeyyy ❤️ Selamat datang."
+        },
 
     },
 
     welcome:{
 
-        intro:
-        "Taraaa~ ❤️ Akhirnya kamu berhasil masuk.",
+        intro:{
+            emotion:"happy",
+            message:"Psst... ❤️"
+        },
 
-        envelope:
-        "Aku punya sesuatu buat kamu...",
+        envelope:{
+            emotion:"thinking",
+            message:"Aku punya sesuatu buat kamu..."
+        },
 
-        open:
-        "Coba buka surat kecil ini yaa ❤️"
+        open:{
+            emotion:"super_excited",
+            message:"Coba buka surat kecil ini yaa ❤️"
+        }
 
-    }
+    },
+
+    envelope:{
+
+        intro:{
+            emotion: "love",
+            message: "Taraaa ❤️",
+        },
+
+        mid:{
+            emotion: "thinking",
+            message: "Hehe... ❤️",
+        },
+
+        end:{
+            emotion: "love",
+            message: "Aku bikin ini khusus buat kamu ❤️",
+        },
+    },
+
+    journey:{
+
+        start:{
+            emotion:"love",
+            message:"Perjalanan kita dimulai ❤️"
+        },
+
+        gallery:{
+            emotion:"happy",
+            message:"Hehe... kita mulai dari sini ya ❤️"
+        }
+
+    },
+
+    idle:[
+
+        {
+            emotion:"happy",
+            message:"...."
+        },
+
+        {
+            emotion:"happy",
+            message:"Hehe~ 🐱"
+        },
+
+        {
+            emotion:"love",
+            message:"Aku tunggu yaa ❤️"
+        },
+
+        {
+            emotion:"thinking",
+            message:"Hmm..."
+        },
+
+        {
+            emotion:"happy",
+            message:"♪ ♪ ♪"
+        },
+
+        {
+            emotion:"cry",
+            message:"Jangan lama-lama yaa 🥺"
+        },
+
+        {
+            emotion:"love",
+            message:"Hari ini kamu cantik banget ❤️"
+        },
+
+        {
+            emotion:"thinking",
+            message:"Aku penasaran nih..."
+        },
+
+        {
+            emotion:"happy",
+            message:"(｡•ᴗ•｡)"
+        },
+
+        {
+            emotion:"love",
+            message:"Semangat yaa ✨"
+        }
+
+    ]
+
+};
+
+//STORIES
+
+Dialogs.gallery={
+
+    gallery:{
+
+        photo1:{
+
+            intro:{
+
+                emotion:"love",
+
+                message:"Foto pertama kita ❤️"
+
+            },
+
+            story:{
+
+                emotion:"thinking",
+
+                message:"Aku masih ingat hari itu..."
+
+            },
+
+            end:{
+
+                emotion:"happy",
+
+                message:"Hehe ❤️"
+
+            }
+
+            }
+
+        }
 
 }

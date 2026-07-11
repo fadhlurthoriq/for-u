@@ -6,26 +6,6 @@ const Scene={
 
 };
 
-Scene.init = function(){
-
-    const savedScene =
-
-        Storage.loadScene();
-
-    if(savedScene){
-
-        this.show(savedScene);
-
-    }
-
-    else{
-
-        this.show("login-scene");
-
-    }
-
-}
-
 Scene.addTimer=function(callback,time){
 
     this.timers.push(
@@ -49,6 +29,8 @@ Scene.clearTimers=function(){
 }
 
 Scene.show = function (id) {
+
+    Overlay.hideAll();
 
     Scene.clearTimers();
 
@@ -78,35 +60,19 @@ Scene.show = function (id) {
 
     if(id==="welcome-scene"){
 
-        Character.say({
+        if(!App.restoring){
 
-            emotion:"happy",
-
-            message:"Psst... ❤️"
-
-        });
+        Character.dialog("welcome.intro");};
 
         Scene.addTimer(()=>{
 
-            Character.say({
-
-            emotion:"thinking",
-
-            message:"Aku punya sesuatu buat kamu..."
-
-        });
+            Character.dialog("welcome.envelope");;
 
         },2200);
 
         Scene.addTimer(()=>{
 
-            Character.say({
-
-                emotion:"super_excited",
-
-                message:"Coba klik amplopnya yaa ❤️"
-
-            });
+            Character.dialog("welcome.open");;
 
         },4500);
 
@@ -114,7 +80,19 @@ Scene.show = function (id) {
 
     }
 
-    Storage.saveScene(id);
+    if(id==="gallery-scene"){
+
+        Gallery.update();
+
+        GalleryCharacter.enter();
+
+    }
+
+    Storage.update({
+
+        scene:id
+
+    });
 }
 
 Scene.cinematic=function(nextScene){

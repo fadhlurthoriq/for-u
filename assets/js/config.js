@@ -2,7 +2,7 @@ const CONFIG = {
 
     login: {
 
-        username: "neysilla dwi carollina",
+        username: "ney",
 
         password: "27112025"
 

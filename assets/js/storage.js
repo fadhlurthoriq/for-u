@@ -1,69 +1,109 @@
-const Storage = {
+const Storage = {};
 
-    KEY: "for-u-progress"
+Storage.KEY = "for-u-save";
+
+Storage.defaultState = {
+
+    scene: "login-scene",
+
+    galleryIndex: 0,
+
+    song: 0,
+
+    musicTime: 0,
+
+    popup: null,
+
+    galleryState:{
+
+        introFinished:false
+
+    }
 
 };
 
-// ==========================
-// SAVE
-// ==========================
+Storage.load = function () {
 
-Storage.saveScene=function(scene){
+    const raw = localStorage.getItem(this.KEY);
 
-    console.log(
+    if (!raw) {
 
-        "Scene Saved :",
+        console.log("Save Loaded : Default");
 
-        scene
+        return { ...this.defaultState };
 
-    );
+    }
+
+    try {
+
+        const data = JSON.parse(raw);
+
+        console.log("Save Loaded :", data);
+
+        return {
+
+            ...this.defaultState,
+
+            ...data
+
+        };
+
+    } catch {
+
+        return { ...this.defaultState };
+
+    }
+
+}
+
+Storage.save = function (state) {
 
     localStorage.setItem(
 
         this.KEY,
 
-        scene
+        JSON.stringify(state)
 
     );
 
+    console.log("Save Saved :", state);
+
 }
 
-// ==========================
-// LOAD
-// ==========================
+Storage.update = function (partial) {
 
-Storage.loadScene=function(){
+    const state = this.load();
 
-    const scene=
+    Object.assign(
 
-    localStorage.getItem(
+        state,
+
+        partial
+
+    );
+
+    this.save(state);
+
+}
+
+Storage.isFirstOpen=function(){
+
+    return localStorage.getItem(
 
         this.KEY
 
-    );
-
-    console.log(
-
-        "Scene Loaded :",
-
-        scene
-
-    );
-
-    return scene;
+    )===null;
 
 }
 
-// ==========================
-// RESET
-// ==========================
-
-Storage.reset = function(){
+Storage.reset = function () {
 
     localStorage.removeItem(
 
         this.KEY
 
     );
+
+    console.log("Save Reset");
 
 }

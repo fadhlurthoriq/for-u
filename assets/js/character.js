@@ -26,11 +26,187 @@ const Character = {
 
     typing: document.getElementById("typing-indicator"),
 
+    queue:[],
+
+    queueIndex:0,
+
+    playing:false,
+
+    queueTimer:null,
+
 };
 
 // ======================================
 // SHOW / HIDE CHARACTER
 // ======================================
+
+Character.dialog=function(path){
+
+    const dialog=
+
+    path.split(".")
+
+    .reduce(
+
+        (obj,key)=>obj[key],
+
+        Dialogs
+
+    );
+
+    if(!dialog) return;
+
+    this.save(
+
+        path,
+
+        dialog
+
+    );
+
+    this.say(dialog);
+
+}
+
+Character.play=function(dialogs){
+
+    this.queue=[...dialogs];
+
+    this.queueIndex=0;
+
+    this.playing=false;
+
+    Storage.update({
+
+        character:{
+
+            ...Storage.load().character,
+
+            queue:[...dialogs],
+
+            queueIndex:0
+
+        }
+
+    });
+
+    this.nextDialog();
+
+}
+
+Character.nextDialog=function(){
+
+    if(this.queue.length===0){
+
+        this.playing=false;
+
+        Storage.update({
+
+            character:{
+
+                ...Storage.load().character,
+
+                queue:[],
+
+                queueIndex:0
+
+            }
+
+        });
+
+        return;
+
+    }
+
+    this.playing=true;
+
+    const dialogPath=
+
+        this.queue.shift();
+
+    Storage.update({
+
+        character:{
+
+            ...Storage.load().character,
+
+            dialog:dialogPath,
+
+            queue:this.queue,
+
+            queueIndex:this.queueIndex
+
+        }
+
+    });
+
+this.queueIndex++;
+
+    const dialog=
+
+        dialogPath
+
+        .split(".")
+
+        .reduce(
+
+            (obj,key)=>obj[key],
+
+            Dialogs
+
+        );
+
+    if(!dialog){
+
+        this.nextDialog();
+
+        return;
+
+    }
+
+    this.dialog(dialogPath);
+
+    const textLength=
+
+        dialog.message.length;
+
+    const wait=
+
+        dialog.wait ||
+
+        textLength*35+1800;
+
+    clearTimeout(this.queueTimer);
+
+    this.queueTimer=setTimeout(()=>{
+
+        this.nextDialog();
+
+    },wait);
+
+}
+
+Character.save=function(dialogPath,data){
+
+    Storage.update({
+
+        character:{
+
+            dialog:dialogPath,
+
+            emotion:data.emotion,
+
+            message:data.message,
+
+            visible:this.visible,
+
+            mode:this.mode
+
+        }
+
+    });
+
+}
 
 Character.show = function () {
 
@@ -72,17 +248,43 @@ Character.hideTyping=function(){
 // SHOW / HIDE BUBBLE
 // ======================================
 
-Character.showBubble = function () {
+Character.showBubble=function(){
 
-    this.bubble.style.opacity = "1";
-    this.bubble.style.visibility = "visible";
+    this.visible=true;
+
+    this.bubble.style.opacity="1";
+
+    this.bubble.style.visibility="visible";
 
 }
 
-Character.hideBubble = function () {
+Character.hideBubble=function(){
 
-    this.bubble.style.opacity = "0";
-    this.bubble.style.visibility = "hidden";
+    this.bubble.style.opacity="0";
+
+    this.bubble.style.visibility="hidden";
+
+    this.visible=false;
+
+    const save=Storage.load();
+
+        Storage.update({
+
+            character:{
+
+                ...save.character,
+
+                emotion:this.currentEmotion,
+
+                message,
+
+                visible:true,
+
+                mode:this.mode
+
+            }
+
+        });
 
 }
 
@@ -150,6 +352,48 @@ Character.changeAnimation = function (animation) {
 
 }
 
+Character.restore=function(){
+
+    this.changeEmotion(
+
+        "happy"
+
+    );
+
+}
+
+Character.restoreQueue=function(){
+
+    const save=
+
+        Storage.load();
+
+    if(!save.character) return;
+
+    const queue=
+
+        save.character.queue;
+
+    if(!queue.length) return;
+
+    const index=
+
+        save.character.queueIndex;
+
+    this.queue=
+
+        queue.slice(index);
+
+    if(this.queue.length){
+
+        this.playing=false;
+
+        this.nextDialog();
+
+    }
+
+}
+
 // ======================================
 // TYPING EFFECT
 // ======================================
@@ -200,6 +444,24 @@ Character.say = function({
 
     this.typeText(message,speed);
 
+    this.visible=true;
+
+    Storage.update({
+
+        character:{
+
+            emotion,
+
+            message,
+
+            visible:true,
+
+            mode:this.mode
+
+        }
+
+    });
+
     if(duration!==null){
 
         this.timer=setTimeout(()=>{
@@ -212,79 +474,43 @@ Character.say = function({
 
 }
 
-// ======================================
-// IDLE MESSAGE
-// ======================================
-
-Character.idleMessages = [
-
-    "....",
-
-    "Hehe~ 🐱",
-
-    "Aku tunggu yaa ❤️",
-
-    "Hmm...",
-
-    "♪ ♪ ♪",
-
-    "Jangan lama-lama yaa 🥺",
-
-    "Hari ini kamu cantik banget ❤️",
-
-    "Aku penasaran nih...",
-
-    "(｡•ᴗ•｡)",
-
-    "Semangat yaa ✨"
-
-];
-
 Character.idleTimer = null;
 
 Character.startIdle=function(){
 
-    if(this.mode!=="idle"){
-
-        return;
-
-    }
+    if(this.mode!=="idle") return;
 
     clearTimeout(this.idleTimer);
 
     this.idleTimer=setTimeout(()=>{
 
-        if(this.mode!=="idle"){
-
-            return;
-
-        }
+        if(this.mode!=="idle") return;
 
         const random=
 
-        this.idleMessages[
+        Dialogs.idle[
 
             Math.floor(
 
                 Math.random()*
 
-                this.idleMessages.length
+                Dialogs.idle.length
 
             )
 
         ];
 
-        this.say({
-
-            emotion:"happy",
-
-            message:random
-
-        });
+        this.say(random);
 
         this.startIdle();
 
     },10000);
+
+}
+
+Character.stopIdle = function(){
+
+    clearTimeout(this.idleTimer);
 
 }
 
@@ -302,15 +528,7 @@ Character.resetIdle=function(){
 
 Character.init=function(){
 
-    this.say({
-
-        emotion:"waving",
-
-        message:"Haiii! Kenalin aku Mochi 🐱❤️ Aku yang nemenin kamu disini gantiin thoriq sementara yaah...",
-
-        duration:6000
-
-    });
+    this.dialog("login.intro");
 
     setTimeout(()=>{
 

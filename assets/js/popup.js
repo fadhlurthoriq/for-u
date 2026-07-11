@@ -28,7 +28,7 @@ Popup.show=function(data){
 
     `assets/emoji/mochi/${data.emotion}.png`;
 
-    this.overlay.classList.add("show");
+    Overlay.showPopup();
 
     Character.hideBubble();
 
@@ -36,7 +36,7 @@ Popup.show=function(data){
 
 Popup.hide=function(){
 
-    this.overlay.classList.remove("show");
+    Overlay.hidePopup();
 
     setTimeout(()=>{
 
