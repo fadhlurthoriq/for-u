@@ -216,11 +216,35 @@ Character.show = function () {
 
 }
 
-Character.hide = function () {
+Character.hide=function(){
 
-    this.image.style.display = "none";
+    this.image.style.display="none";
 
-    this.visible = false;
+    this.hideBubble();
+
+    this.visible=false;
+
+}
+
+Character.disable=function(){
+
+    this.mode="disabled";
+
+    this.stopIdle();
+
+    clearTimeout(this.timer);
+
+    clearTimeout(this.queueTimer);
+
+    clearInterval(this.typingTimer);
+
+    this.queue=[];
+
+    this.playing=false;
+
+    this.hideBubble();
+
+    this.hide();
 
 }
 
@@ -276,7 +300,7 @@ Character.hideBubble=function(){
 
                 emotion:this.currentEmotion,
 
-                message,
+                message:"",
 
                 visible:true,
 
@@ -528,9 +552,7 @@ Character.resetIdle=function(){
 
 Character.init=function(){
 
-    this.dialog("login.intro");
-
-    setTimeout(()=>{
+    this.idleTimer = setTimeout(()=>{
 
         this.startIdle();
 

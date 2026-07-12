@@ -76,6 +76,8 @@ Journey.showGallery=function(){
 
     GalleryCharacter.enter();
 
+    Music.play();
+
     requestAnimationFrame(()=>{
 
         gallery.classList.add("reveal");
@@ -86,7 +88,7 @@ Journey.showGallery=function(){
 
         Overlay.hideJourney();
 
-        Character.dialog("journey.gallery");
+        GalleryCharacter.playCategory("gallery");
 
     },800);
 

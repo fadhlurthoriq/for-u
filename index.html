@@ -1,47 +1,40 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
 
-<head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>❤️ for u</title>
 
     <!-- FONT -->
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
 
     <!-- CSS -->
 
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css" />
 
-    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="assets/css/animations.css" />
 
-    <link rel="stylesheet" href="assets/css/popup.css">
+    <link rel="stylesheet" href="assets/css/popup.css" />
+  </head>
 
-</head>
-
-<body>
-
+  <body>
     <!-- ==========================
             BACKGROUND
     =========================== -->
 
     <div class="background">
+      <div class="blob blob1"></div>
 
-        <div class="blob blob1"></div>
+      <div class="blob blob2"></div>
 
-        <div class="blob blob2"></div>
-
-        <div class="noise"></div>
-
+      <div class="noise"></div>
     </div>
 
     <div id="focus-overlay"></div>
@@ -53,39 +46,23 @@
     =========================== -->
 
     <div id="character-layer">
+      <div id="character-wrapper">
+        <div id="character-bubble">
+          <div id="bubble-content">
+            <div id="bubble-text"></div>
 
-        <div id="character-wrapper">
+            <div id="typing-indicator">
+              <span></span>
 
-            <div id="character-bubble">
+              <span></span>
 
-                <div id="bubble-content">
-
-                    <div id="bubble-text"></div>
-
-                    <div id="typing-indicator">
-
-                        <span></span>
-
-                        <span></span>
-
-                        <span></span>
-
-                    </div>
-
-                </div>
-
+              <span></span>
             </div>
-
-            <img
-
-                id="character-image"
-
-                src="assets/emoji/mochi/happy.png"
-
-                alt="Mochi">
-
+          </div>
         </div>
 
+        <img id="character-image" src="assets/emoji/mochi/happy.png" alt="Mochi" />
+      </div>
     </div>
 
     <!-- ==========================
@@ -93,11 +70,9 @@
     =========================== -->
 
     <div id="floating-layer">
+      <div id="music-player-placeholder"></div>
 
-        <div id="music-player-placeholder"></div>
-
-        <div id="journey-progress-placeholder"></div>
-
+      <div id="journey-progress-placeholder"></div>
     </div>
 
     <!-- ==========================
@@ -105,267 +80,208 @@
     =========================== -->
 
     <div class="mobile-warning">
+      <div>
+        💻
 
-        <div>
+        <h2>Website ini dibuat khusus untuk Desktop.</h2>
 
-            💻
-
-            <h2>
-
-                Website ini dibuat khusus untuk Desktop.
-
-            </h2>
-
-            <p>
-
-                Silakan buka menggunakan Laptop atau PC ya ❤️
-
-            </p>
-
-        </div>
-
+        <p>Silakan buka menggunakan Laptop atau PC ya ❤️</p>
+      </div>
     </div>
 
     <main id="story">
+      <div id="transition-overlay">
+        <div id="journey-transition">
+          <div class="journey-content">
+            <h1 id="journey-title">Perjalanan Kita Dimulai ❤️</h1>
 
-        <div id="transition-overlay">
-
-            <div id="journey-transition">
-
-                <div class="journey-content">
-
-                    <h1 id="journey-title">
-
-                        Perjalanan Kita Dimulai ❤️
-
-                    </h1>
-
-                    <p id="journey-subtitle">
-
-                        Aku sudah menyiapkan sesuatu spesial...
-
-                    </p>
-
-                </div>
-
-            </div>
-
-            <div class="transition-text">
-
-                <h2 id="transition-title"></h2>
-
-                <p id="transition-subtitle"></p>
-
-            </div>
-
+            <p id="journey-subtitle">Aku sudah menyiapkan sesuatu spesial...</p>
+          </div>
         </div>
 
-        <section id="login-scene" class="scene active">
-            <div class="container">
+        <div class="transition-text">
+          <h2 id="transition-title"></h2>
 
-                <div class="login-layout">
+          <p id="transition-subtitle"></p>
+        </div>
+      </div>
 
-                    <div id="login-card" class="login-card glass-card">
+      <section id="login-scene" class="scene active">
+        <div class="container">
+          <div class="login-layout">
+            <div id="login-card" class="login-card glass-card">
+              <h1>Helloo ❤️</h1>
 
-                        <h1>Helloo ❤️</h1>
+              <p>Selamat datang di tempat kecil yang aku buat khusus untukmu.</p>
 
-                        <p>
-                            Selamat datang di tempat kecil yang aku buat khusus untukmu.
-                        </p>
+              <div class="input-group">
+                <input id="username" placeholder=" " type="text" required />
 
-                        <div class="input-group">
+                <label for="username"> Nama Kamu </label>
+              </div>
 
-                            <input
-                                id="username"
-                                placeholder=" "
-                                type="text"
-                                required>
+              <div class="input-group">
+                <input id="password" placeholder=" " type="password" required />
 
-                            <label for="username">
+                <label for="password"> Tanggal Awal Kenal </label>
+              </div>
 
-                                Nama Kamu
-
-                            </label>
-
-                        </div>
-
-                        <div class="input-group">
-
-                            <input
-                                id="password"
-                                placeholder=" "
-                                type="password"
-                                required>
-
-                            <label for="password">
-
-                                Tanggal Awal Kenal
-
-                            </label>
-
-                        </div>
-
-                        <button id="login-btn">
-
-                            Masuk
-
-                        </button>
-
-                    </div>
-
-                </div>
-
+              <button id="login-btn">Masuk</button>
             </div>
-        </section>
+          </div>
+        </div>
+      </section>
 
-        <section id="welcome-scene" class="scene">
+      <section id="welcome-scene" class="scene">
+        <div id="welcome-wrapper">
+          <div id="envelope-stage">
+            <img id="letter" src="assets/img/envelope/letter.png" />
 
-            <div id="welcome-wrapper">
+            <img id="envelope" src="assets/img/envelope/closed.png" />
+          </div>
 
-                <div id="envelope-stage">
+          <div id="welcome-card" class="glass-card">
+            <img id="card-letter" src="assets/img/envelope/hover.png" alt="" />
 
-                    <img
-                        id="letter"
-                        src="assets/img/envelope/letter.png"
-                    >
+            <h1>Untuk Kamu ❤️</h1>
 
-                    <img
-                        id="envelope"
-                        src="assets/img/envelope/closed.png"
-                    >
+            <p>Ada sesuatu yang ingin aku tunjukkan...</p>
 
-                </div>
+            <button id="start-story">Mulai Perjalanan ❤️</button>
+          </div>
+        </div>
+      </section>
 
-                <div id="welcome-card" class="glass-card">
+      <section id="gallery-scene" class="scene">
+        <div id="gallery-container">
+          <button id="gallery-prev" class="gallery-arrow">❮</button>
 
-                    <img
-                        id="card-letter"
-                        src="assets/img/envelope/hover.png"
-                        alt="">
+          <div id="gallery-viewport">
+            <div id="gallery-track"></div>
+          </div>
 
-                    <h1>Untuk Kamu ❤️</h1>
-
-                    <p>
-                        Ada sesuatu yang ingin aku tunjukkan...
-                    </p>
-
-                    <button id="start-story">
-                        Mulai Perjalanan ❤️
-                    </button>
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <section id="gallery-scene" class="scene">
-
-            <div id="gallery-container">
-
-                <button
-                    id="gallery-prev"
-                    class="gallery-arrow">
-
-                    ❮
-
-                </button>
-
-                <div id="gallery-viewport">
-
-                    <div id="gallery-track">
-
-                    </div>
-
-                </div>
-
-                <button
-                    id="gallery-next"
-                    class="gallery-arrow">
-
-                    ❯
-
-                </button>
-
-            </div>
-
-            <div id="gallery-progress">
-
-                <span id="gallery-current">
-
-                    1
-
-                </span>
-
-                /
-
-                <span id="gallery-total">
-
-                    1
-
-                </span>
-
-            </div>
-
-        </section>
-
-        <div id="gallery-popup">
-
-            <div id="gallery-popup-card">
-
-                <button id="gallery-popup-close">
-                    ✕
-                </button>
-
-                <div class="gallery-popup-left">
-
-                    <img
-                        id="gallery-popup-image"
-                        src=""
-                        alt="">
-
-                </div>
-
-                <div class="gallery-popup-right">
-
-                    <div class="gallery-popup-story">
-
-                        <h2 id="gallery-popup-title"></h2>
-
-                        <p id="gallery-popup-date"></p>
-
-                        <div id="gallery-popup-memory"></div>
-
-                    </div>
-
-                    <div class="gallery-popup-mochi">
-
-                        <img
-                            id="gallery-popup-mochi-image"
-                            src="assets/emoji/mochi/happy.png">
-
-                        <div id="gallery-popup-mochi-bubble"></div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
+          <button id="gallery-next" class="gallery-arrow">❯</button>
         </div>
 
-        <section id="letter-scene" class="scene">
-            <div class="container"></div>
-        </section>
+        <div id="gallery-progress">
+          <span id="gallery-current"> 1 </span>
 
-        <section id="question-scene" class="scene">
-            <div class="container"></div>
-        </section>
+          /
 
-        <section id="ending-scene" class="scene">
-            <div class="container"></div>
-        </section>
+          <span id="gallery-total"> 1 </span>
+        </div>
 
+        <div id="gallery-scene-mochi" class="gallery-scene-mochi">
+          <img id="gallery-scene-mochi-image" src="assets/emoji/mochi/happy.png" alt="Mochi" />
+
+          <div id="gallery-scene-mochi-bubble"></div>
+        </div>
+
+        <div id="gallery-end-card">
+            <h2>Gimana? 🥹</h2>
+            <p>Udah puas lihat kenangannya? Mau lanjut ke yang lain, atau masih mau lihat-lihat lagi?</p>
+            <div class="gallery-end-buttons">
+                <button id="gallery-end-again">Lihat Lagi</button>
+                <button id="gallery-end-continue">Lanjut ❤️</button>
+            </div>
+        </div>
+
+      </section>
+
+      <div id="gallery-popup">
+        <div id="gallery-popup-card">
+          <button id="gallery-popup-close">✕</button>
+
+          <div class="gallery-popup-left">
+            <img id="gallery-popup-image" src="" alt="" />
+          </div>
+
+          <div class="gallery-popup-right">
+            <div class="gallery-popup-story">
+              <h2 id="gallery-popup-title"></h2>
+
+              <p id="gallery-popup-date"></p>
+
+              <div id="gallery-popup-memory"></div>
+            </div>
+
+            <div class="gallery-popup-mochi">
+              <img id="gallery-popup-mochi-image" src="assets/emoji/mochi/happy.png" />
+
+              <div id="gallery-popup-mochi-bubble"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section id="letter-scene" class="scene">
+        <div id="letter-stack"></div>
+
+        <div id="letter-progress">
+          <span id="letter-current">1</span> / <span id="letter-total">1</span>
+        </div>
+
+        <div id="letter-scene-mochi" class="gallery-scene-mochi">
+          <img id="letter-scene-mochi-image" src="assets/emoji/mochi/happy.png" alt="Mochi" />
+          <div id="letter-scene-mochi-bubble"></div>
+        </div>
+      </section>
+
+      <div id="letter-end-overlay">
+        <div id="letter-end-mochi">
+          <img id="letter-end-mochi-image" src="assets/emoji/mochi/thinking.png" alt="Mochi" />
+          <div id="letter-end-mochi-bubble"></div>
+        </div>
+
+        <div id="letter-end-buttons">
+          <button id="letter-end-no">Baca Lagi</button>
+          <button id="letter-end-yes">Lanjut ❤️</button>
+        </div>
+      </div>
+
+      <section id="question-scene" class="scene">
+        <div id="question-progress">
+          <div id="question-progress-fill"></div>
+        </div>
+
+        <div id="question-stack"></div>
+
+        <div id="question-scene-mochi" class="question-scene-mochi">
+          <img id="question-scene-mochi-image" src="assets/emoji/mochi/happy.png" alt="Mochi" />
+          <div id="question-scene-mochi-bubble"></div>
+        </div>
+      </section>
+
+      <div id="question-end-overlay">
+        <div id="question-end-mochi">
+          <img id="question-end-mochi-image" src="assets/emoji/mochi/thinking.png" alt="Mochi" />
+          <div id="question-end-mochi-bubble"></div>
+        </div>
+      </div>
+
+      <section id="ending-scene" class="scene">
+        <div id="ending-gift-stage" class="ending-gift-stage">
+
+          <img id="ending-gift-image" src="assets/img/ending/gift-closed.png" alt="Kotak Hadiah" />
+          <p class="ending-hint">Ketuk kotaknya ya ❤️</p>
+        </div>
+
+        <div id="ending-thanks-card">
+          <div id="ending-mochi" class="ending-mochi">
+            <img id="ending-mochi-image" src="assets/emoji/mochi/love.png" alt="Mochi" />
+            <div id="ending-mochi-bubble"></div>
+          </div>
+
+          <button id="ending-thanks-close" aria-label="Tutup">✕</button>
+          <div id="ending-thanks-text"></div>
+        </div>
+
+        <div id="ending-qr-card">
+          <div id="ending-qr-text"></div>
+          <img id="ending-qr-image" src="" alt="QR Code Bloopers" />
+          <a id="ending-qr-link" href="#" target="_blank" rel="noopener">Buka di Google Drive</a>
+        </div>
+      </section>
     </main>
 
     <!-- ===================================
@@ -373,107 +289,112 @@
     =================================== -->
 
     <div id="popup-overlay">
+      <div id="popup-card" class="glass-card">
+        <img id="popup-character" src="assets/emoji/mochi/happy.png" alt="Mochi" />
 
-        <div id="popup-card" class="glass-card">
+        <h2 id="popup-title">Judul</h2>
 
-            <img
+        <p id="popup-message">Lorem ipsum dolor sit amet.</p>
 
-                id="popup-character"
+        <button id="popup-button">Oke ❤️</button>
+      </div>
+    </div>
 
-                src="assets/emoji/mochi/happy.png"
+    <script src="assets/data/dialogs.js"></script>
 
-                alt="Mochi">
+    <script src="assets/data/stories.js"></script>
 
-            <h2 id="popup-title">
+    <script src="assets/data/gallery.js"></script>
 
-                Judul
+    <script src="assets/data/popup.js"></script>
 
-            </h2>
+    <script src="assets/data/playlist.js"></script>
 
-            <p id="popup-message">
+    <script src="assets/js/config.js"></script>
 
-                Lorem ipsum dolor sit amet.
+    <script src="assets/js/character.js"></script>
 
-            </p>
+    <script src="assets/js/popup-character.js"></script>
 
-            <button id="popup-button">
+    <script src="assets/js/overlay.js"></script>
 
-                Oke ❤️
+    <script src="assets/js/popup.js"></script>
 
-            </button>
+    <script src="assets/js/scene.js"></script>
+
+    <script src="assets/js/storage.js"></script>
+
+    <script src="assets/data/gallery-dialog.js"></script>
+
+    <script src="assets/js/gallery-character.js"></script>
+
+    <script src="assets/js/envelope.js"></script>
+
+    <script src="assets/js/gallery.js"></script>
+
+    <script src="assets/js/gallery-end.js"></script>
+
+    <script src="assets/js/journey.js"></script>
+
+    <script src="assets/js/login.js"></script>
+
+    <script src="assets/js/music.js"></script>
+
+    <script src="assets/data/letter.js"></script>
+
+    <script src="assets/js/letter.js"></script>
+
+    <script src="assets/js/letter-end.js"></script>
+
+    <script src="assets/data/questions.js"></script>
+
+    <script src="assets/js/question.js"></script>
+
+    <script src="assets/js/question-end.js"></script>
+
+    <script src="assets/js/ending.js"></script>
+
+    <script src="assets/js/app.js"></script>
+
+    <div id="music-player">
+
+        <div class="player-photo-bg"></div>
+        <div class="player-glass-overlay"></div>
+
+        <div class="player-main">
+            <div class="player-cover">🎵</div>
+
+            <div class="player-info">
+            <h3 id="player-title">Our Song</h3>
+
+            <p id="player-artist">For You ❤️</p>
+            </div>
+
+            <div id="player-toggle" class="player-control">⏸</div>
+        </div>
+
+        <div class="player-expand">
+
+            <div class="player-progress">
+            <span id="player-time-current">0:00</span>
+
+            <div id="player-progress-bar" class="player-progress-bar">
+                <div id="player-progress-fill" class="player-progress-fill"></div>
+            </div>
+
+            <span id="player-time-total">0:00</span>
+            </div>
+
+            <div class="player-buttons">
+            <button id="player-prev" class="player-btn">⏮</button>
+            <button id="player-playpause" class="player-btn player-btn-main">⏸</button>
+            <button id="player-next" class="player-btn">⏭</button>
+            </div>
 
         </div>
 
-    </div>
-
-<script src="assets/data/dialogs.js"></script>
-
-<script src="assets/data/stories.js"></script>
-
-<script src="assets/data/gallery.js"></script>
-
-<script src="assets/data/popup.js"></script>
-
-<script src="assets/data/playlist.js"></script>
-
-<script src="assets/js/config.js"></script>
-
-<script src="assets/js/character.js"></script>
-
-<script src="assets/js/overlay.js"></script>
-
-<script src="assets/js/popup.js"></script>
-
-<script src="assets/js/scene.js"></script>
-
-<script src="assets/js/storage.js"></script>
-
-<script src="js/data/gallery-dialog.js"></script>
-
-<script src="assets/js/gallery-character.js"></script>
-
-<script src="assets/js/envelope.js"></script>
-
-<script src="assets/js/gallery.js"></script>
-
-<script src="assets/js/journey.js"></script>
-
-<script src="assets/js/login.js"></script>
-
-<script src="assets/js/music.js"></script>
-
-<script src="assets/js/popup-character.js"></script>
-
-<script src="assets/js/app.js"></script>
-
-<div id="music-player">
-
-    <div class="player-cover">
-
-        🎵
+        <audio id="player-audio"></audio>
 
     </div>
-
-    <div class="player-info">
-
-        <h3 id="player-title">
-            Our Song
-        </h3>
-
-        <p id="player-artist">
-            For You ❤️
-        </p>
-
-    </div>
-
-    <div class="player-control">
-
-        ⏸
-
-    </div>
-
-</div>
-
-</body>
-
+  </body>
 </html>

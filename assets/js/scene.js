@@ -34,7 +34,7 @@ Scene.show = function (id) {
 
     Scene.clearTimers();
 
-    if(id === "login-scene"){
+    if(id==="login-scene" && !App.restoring){
 
         setTimeout(()=>{
 
@@ -82,10 +82,33 @@ Scene.show = function (id) {
 
     if(id==="gallery-scene"){
 
+        Character.disable();
+
         Gallery.update();
 
         GalleryCharacter.enter();
 
+    }
+
+    if(id==="letter-scene"){
+
+        Character.disable();
+
+        Letter.enter();
+
+    }
+
+    if(id==="question-scene"){
+
+        Character.disable();
+
+        Question.enter();
+
+    }
+
+    if(id==="ending-scene"){
+        Character.disable();
+        Ending.enter();
     }
 
     Storage.update({
@@ -142,5 +165,30 @@ Scene.cinematic=function(nextScene){
         overlay.classList.remove("show");
 
     },3200);
+
+}
+
+Scene.cinematicBlank = function (callback) {
+
+    const overlay = document.getElementById("transition-overlay");
+    const title = document.getElementById("transition-title");
+    const subtitle = document.getElementById("transition-subtitle");
+
+    title.innerHTML = "";
+    subtitle.innerHTML = "";
+
+    overlay.classList.add("show");
+
+    setTimeout(() => {
+
+        if (callback) callback();
+
+    }, 900);
+
+    setTimeout(() => {
+
+        overlay.classList.remove("show");
+
+    }, 1200);
 
 }

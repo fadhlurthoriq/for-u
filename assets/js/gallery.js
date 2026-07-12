@@ -1,86 +1,68 @@
 const Gallery = {
+  current: 0,
 
-    current:0,
+  data: GalleryData,
 
-    data:GalleryData,
+  track: null,
 
-    track:null,
+  prev: null,
 
-    prev:null,
+  next: null,
 
-    next:null,
+  total: null,
 
-    total:null,
-
-    currentText:null
-
+  currentText: null,
 };
 
-Gallery.popup=null;
+Gallery.popup = null;
 
-Gallery.popupImage=null;
+Gallery.popupImage = null;
 
-Gallery.popupTitle=null;
+Gallery.popupTitle = null;
 
-Gallery.popupDate=null;
+Gallery.popupDate = null;
 
-Gallery.popupMemory=null;
+Gallery.popupMemory = null;
 
-Gallery.popupClose=null;
+Gallery.popupClose = null;
 
-Gallery.init=function(){
+Gallery.init = function () {
+  this.track = document.getElementById("gallery-track");
 
-    this.track=document.getElementById("gallery-track");
+  this.prev = document.getElementById("gallery-prev");
 
-    this.prev=document.getElementById("gallery-prev");
+  this.next = document.getElementById("gallery-next");
 
-    this.next=document.getElementById("gallery-next");
+  this.total = document.getElementById("gallery-total");
 
-    this.total=document.getElementById("gallery-total");
+  this.currentText = document.getElementById("gallery-current");
 
-    this.currentText=document.getElementById("gallery-current");
+  this.popup = document.getElementById("gallery-popup");
 
-    this.popup=document.getElementById(
-        "gallery-popup"
-    );
+  this.popupImage = document.getElementById("gallery-popup-image");
 
-    this.popupImage=document.getElementById(
-        "gallery-popup-image"
-    );
+  this.popupTitle = document.getElementById("gallery-popup-title");
 
-    this.popupTitle=document.getElementById(
-        "gallery-popup-title"
-    );
+  this.popupDate = document.getElementById("gallery-popup-date");
 
-    this.popupDate=document.getElementById(
-        "gallery-popup-date"
-    );
+  this.popupMemory = document.getElementById("gallery-popup-memory");
 
-    this.popupMemory=document.getElementById(
-        "gallery-popup-memory"
-    );
+  this.popupClose = document.getElementById("gallery-popup-close");
 
-    this.popupClose=document.getElementById(
-        "gallery-popup-close"
-    );
+  if (!this.track) return;
 
-    if(!this.track) return;
+  this.render();
 
-    this.render();
+  this.bind();
 
-    this.bind();
+  this.update();
+};
 
-    this.update();
+Gallery.render = function () {
+  let html = "";
 
-}
-
-Gallery.render=function(){
-
-    let html = "";
-
-    this.data.forEach((photo,index)=>{
-
-        html+=`
+  this.data.forEach((photo, index) => {
+    html += `
 
         <div class="gallery-item">
 
@@ -99,303 +81,182 @@ Gallery.render=function(){
         </div>
 
         `;
+  });
 
-    });
+  this.track.innerHTML = html;
 
-    this.track.innerHTML=html;
+  if (this.total) {
+    this.total.innerHTML = this.data.length;
+  }
 
-    if(this.total){
-
-    this.total.innerHTML=this.data.length;
-
-}
-
-document
-.querySelectorAll(".gallery-photo")
-.forEach(photo=>{
-
+  document.querySelectorAll(".gallery-photo").forEach((photo) => {
     photo.onclick = () => {
+      const index = photo.dataset.index;
 
-        const index = photo.dataset.index;
-
-        Gallery.openPopup(index);
-
+      Gallery.openPopup(index);
+    };
+  });
 };
 
-});
+Gallery.get = function (index) {
+  return {
+    photo: GalleryData[index],
 
-}
+    story: Stories.gallery[index],
+  };
+};
 
-Gallery.get=function(index){
+Gallery.story = function (index) {
+  return Stories.gallery[index];
+};
 
-    return{
+Gallery.openPopup = function (index) {
+    const data = Gallery.get(index);
 
-        photo:GalleryData[index],
+    this.openIndex = index; // ⬅️ TAMBAH INI
 
-        story:Stories.gallery[index]
-
-    };
-
-}
-
-Gallery.story=function(index){
-
-    return Stories.gallery[index];
-
-}
-
-Gallery.openPopup=function(index){
-
-    const data=Gallery.get(index);
-
-    this.popupImage.src=data.photo.image;
-
-    this.popupTitle.innerHTML=data.story.title;
-
-    this.popupDate.innerHTML=data.story.date;
-
-    this.popupMemory.innerHTML=data.story.memory;
-
-        if(data.story.popup){
-
-            PopupCharacter.play(data.story.popup);
-
-        }
+    this.popupImage.src = data.photo.image;
+    this.popupTitle.innerHTML = data.story.title;
+    this.popupDate.innerHTML = data.story.date;
+    this.popupMemory.innerHTML = data.story.memory;
 
     this.popup.classList.add("show");
 
-    GalleryCharacter.on(
+    if (data.story.popup) {
+        PopupCharacter.play(data.story.popup, "popup");
+    }
 
-        "popupOpen",
+    GalleryCharacter.on("popupOpen", index);
 
-        index
+    Storage.update({ popup: index });
+};
 
-    );
-
-    Storage.update({
-
-        popup:index
-
-    });
-
-}
-
-Gallery.closePopup=function(){
-
-    PopupCharacter.stop();
+Gallery.closePopup = function () {
+    PopupCharacter.stop({ preserveScene: true });
 
     this.popup.classList.remove("show");
 
-    GalleryCharacter.on(
+    GalleryCharacter.on("popupClose", this.openIndex); // ⬅️ KIRIM INDEX
 
-        "popupClose"
+    Storage.update({ popup: null });
 
-    );
+    if (this.openIndex == this.data.length - 1) {
+        setTimeout(() => GalleryEnd.show(), 400);
+    }
+};
 
-    Storage.update({
+Gallery.bind = function () {
+  this.next.onclick = () => {
+    this.goNext();
+  };
 
-        popup:null
+  this.prev.onclick = () => {
+    this.goPrev();
+  };
 
-    });
+  this.popupClose.onclick = () => {
+    this.closePopup();
+  };
 
-}
+  this.popup.onclick = (e) => {
+    if (e.target === this.popup) {
+      this.closePopup();
+    }
+  };
 
-Gallery.bind=function(){
+  document.addEventListener("keydown", (e) => {
+    if (Scene.current !== "gallery-scene") return;
 
-    this.next.onclick=()=>{
-
-        this.goNext();
-
+    if (e.key === "ArrowRight") {
+      this.goNext();
     }
 
-    this.prev.onclick=()=>{
-
-        this.goPrev();
-
+    if (e.key === "ArrowLeft") {
+      this.goPrev();
     }
+  });
+};
 
-    this.popupClose.onclick=()=>{
-
-        this.closePopup();
-
-    }
-
-    this.popup.onclick=(e)=>{
-
-        if(e.target===this.popup){
-
-            this.closePopup();
-
-        }
-
-    }
-
-    document.addEventListener("keydown",(e)=>{
-
-        if(Scene.current!=="gallery-scene") return;
-
-        if(e.key==="ArrowRight"){
-
-            this.goNext();
-
-        }
-
-        if(e.key==="ArrowLeft"){
-
-            this.goPrev();
-
-        }
-
-    });
-
-}
-
-Gallery.goNext=function(){
-
-    if(this.current>=this.data.length-1){
-
+Gallery.goNext = function () {
+    if (this.current >= this.data.length - 1) {
         return;
-
     }
 
-    GalleryCharacter.onPhoto(
-
-        this.current
-
-    );
-
-    GalleryCharacter.on(
-
-        "next"
-
-    );
+    GalleryCharacter.on("next", this.current);
 
     this.current++;
 
     Gallery.update();
+    Gallery.save();
+};
 
-    GalleryCharacter.onPhoto(this.current);
-
-    GalleryCharacter.on("next");
-
-    this.save();
-
-}
-
-Gallery.goPrev=function(){
-
-    if(this.current<=0){
-
+Gallery.goPrev = function () {
+    if (this.current <= 0) {
         return;
-
     }
 
-    GalleryCharacter.onPhoto(
-
-        this.current
-
-    );
-
-    GalleryCharacter.on(
-
-        "prev"
-
-    );
+    GalleryCharacter.on("prev", this.current);
 
     this.current--;
 
     Gallery.update();
-
-    GalleryCharacter.onPhoto(this.current);
-
-    GalleryCharacter.on("prev");
-
     this.save();
+};
 
-}
+Gallery.update = function () {
+  const width = document.querySelector(".gallery-item")?.offsetWidth || window.innerWidth;
 
-Gallery.update=function(){
+  const offset = this.current * width;
 
-    const width=document
-    .querySelector(".gallery-item")
-    ?.offsetWidth || window.innerWidth;
+  this.track.style.transform = `translateX(-${offset}px)`;
 
-    const offset=this.current*width;
+  if (this.currentText) {
+    this.currentText.innerHTML = this.current + 1;
+  }
 
-    this.track.style.transform=
+  if (this.prev) {
+    this.prev.disabled = this.current === 0;
+  }
 
-    `translateX(-${offset}px)`;
+  if (this.next) {
+    this.next.disabled = this.current === this.data.length - 1;
+  }
+};
 
-    if(this.currentText){
+Gallery.save = function () {
+  Storage.update({
+    galleryIndex: this.current,
+  });
+};
 
-        this.currentText.innerHTML=this.current+1;
+Gallery.restore = function () {
+  const save = Storage.load();
 
-    }
+  this.current = save.galleryIndex || 0;
 
-    if(this.prev){
-        this.prev.disabled = this.current===0;
-    }
+  this.update();
 
-    if(this.next){
-        this.next.disabled =
-            this.current===this.data.length-1;
-    }
+  document.getElementById("gallery-scene").classList.add("reveal");
 
-}
+  if (save.popup !== null) {
+    GalleryCharacter.pause();
 
-Gallery.save=function(){
+    this.openPopup(save.popup);
+  } else {
+    GalleryCharacter.enter();
+  }
+};
 
-    Storage.update({
+Gallery.reset = function () {
+  this.current = 0;
 
-        galleryIndex:this.current
-
-    });
-
-}
-
-Gallery.restore=function(){
-
-    const save=Storage.load();
-
-    this.current=save.galleryIndex||0;
-
-    this.update();
-
-    document
-        .getElementById("gallery-scene")
-        .classList.add("reveal");
-
-    if(save.popup!==null){
-
-        GalleryCharacter.pause();
-
-        this.openPopup(save.popup);
-
-    }else{
-
-        GalleryCharacter.enter();
-
-    }
-
-}
-
-Gallery.reset=function(){
-
-    this.current=0;
-
-    this.update();
-
-}
+  this.update();
+};
 
 window.addEventListener(
+  "resize",
 
-    "resize",
-
-    ()=>{
-
-        Gallery.update();
-
-    }
-
+  () => {
+    Gallery.update();
+  },
 );
-

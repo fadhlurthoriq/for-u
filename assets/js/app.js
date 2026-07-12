@@ -5,12 +5,17 @@ const App={
 };
 
 App.init=function(){
+    
 
     Character.init();
 
     PopupCharacter.init();
 
     GalleryCharacter.init();
+
+    GalleryEnd.init();
+
+    LetterEnd.init();
 
     Overlay.init();
 
@@ -20,11 +25,31 @@ App.init=function(){
 
     Gallery.init();
 
+    Letter.init();
+
+    Question.init(); 
+
+    QuestionEnd.init();
+
+    Ending.init();   
+
     Login.init();
 
     App.restore();
 
 }
+
+App.postGalleryScenes=[
+
+    "gallery-scene",
+
+    "letter-scene",
+
+    "question-scene",
+
+    "ending-scene"
+
+];
 
 App.restore=function(){
 
@@ -40,13 +65,25 @@ App.restore=function(){
 
             Gallery.restore();
 
-            Music.restore();
+            Music.float();
+
+        break;
+
+        case "letter-scene":
+
+        case "question-scene":
+
+        case "ending-scene":
+
+            // udah lewat gallery, player harus tetep keliatan (floating)
+
+            Music.float();
 
         break;
 
     }
 
-    if(save.scene==="gallery-scene"){
+    if(App.postGalleryScenes.includes(save.scene)){
 
     document.getElementById("welcome-card").style.display="none";}
 

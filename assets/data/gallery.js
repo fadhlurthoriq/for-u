@@ -16,12 +16,4 @@ const GalleryData=[
 
 },
 
-{
-
-    image:"assets/img/gallery/1.png",
-
-    sticker:"flower"
-
-}
-
 ];

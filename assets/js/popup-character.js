@@ -1,224 +1,251 @@
 const PopupCharacter = {
+  image: null,
 
-    image:null,
+  bubble: null,
 
-    bubble:null,
+  sceneImage: null,
 
-    typingTimer:null,
+  sceneBubble: null,
 
-    timer:null,
+  sceneContainer: null,
 
-    currentEmotion:"happy",
+  typingTimer: null,
 
-    queue:[],
+  timer: null,
 
-    current:0,
+  currentEmotion: "happy",
 
-    playing:false,
+  queue: [],
 
-    queueTimer:null,
+  current: 0,
 
-    defaultSpeed:28,
+  playing: false,
 
+  queueTimer: null,
+
+  defaultSpeed: 28,
+
+  activeTarget: null,
 };
 
-PopupCharacter.init=function(){
+PopupCharacter.init = function () {
+  this.image = document.getElementById("gallery-popup-mochi-image");
 
-    this.image=document.getElementById(
-        "gallery-popup-mochi-image"
-    );
+  this.bubble = document.getElementById("gallery-popup-mochi-bubble");
 
-    this.bubble=document.getElementById(
-        "gallery-popup-mochi-bubble"
-    );
+  this.sceneImage = document.getElementById("gallery-scene-mochi-image");
 
-}
+  this.sceneBubble = document.getElementById("gallery-scene-mochi-bubble");
 
-PopupCharacter.play=function(dialogs){
+  this.sceneContainer = document.getElementById("gallery-scene-mochi");
 
-    if(!dialogs) return;
+  this.hideAll();
+};
 
-    if(!Array.isArray(dialogs)){
+PopupCharacter.getTarget = function () {
+  if (this.activeTarget === "popup" && this.image && this.bubble) {
+    return {
+      image: this.image,
 
-        dialogs=[dialogs];
+      bubble: this.bubble,
+    };
+  }
 
-    }
+  if (this.activeTarget === "scene" && this.sceneImage && this.sceneBubble) {
+    return {
+      image: this.sceneImage,
 
-    this.stop();
+      bubble: this.sceneBubble,
 
-    this.queue=[...dialogs];
+      container: this.sceneContainer,
+    };
+  }
 
-    this.current=0;
+  if (typeof Gallery !== "undefined" && Gallery.popup?.classList.contains("show") && this.image && this.bubble) {
+    return {
+      image: this.image,
 
-    this.playing=true;
+      bubble: this.bubble,
+    };
+  }
+
+  if (this.sceneImage && this.sceneBubble) {
+    return {
+      image: this.sceneImage,
+
+      bubble: this.sceneBubble,
+
+      container: this.sceneContainer,
+    };
+  }
+
+  return {
+    image: this.image,
+
+    bubble: this.bubble,
+  };
+};
+
+PopupCharacter.play = function (dialogs, target = "auto") {
+  if (!dialogs) return;
+
+  if (!Array.isArray(dialogs)) {
+    dialogs = [dialogs];
+  }
+
+  this.stop();
+
+  this.activeTarget = target;
+
+  this.queue = [...dialogs];
+
+  this.current = 0;
+
+  this.playing = true;
+
+  this.next();
+};
+
+PopupCharacter.next = function () {
+  if (this.current >= this.queue.length) {
+    this.playing = false;
+
+    return;
+  }
+
+  const dialog = this.queue[this.current];
+
+  this.say(dialog);
+
+  const speed = dialog.speed ?? this.defaultSpeed;
+
+  const wait = dialog.wait ?? dialog.message.length * speed + (dialog.stay ?? 1800);
+
+  clearTimeout(this.queueTimer);
+
+  this.queueTimer = setTimeout(() => {
+    this.current++;
 
     this.next();
+  }, wait);
+};
 
-}
+PopupCharacter.changeEmotion = function (emotion, target) {
+  if (!emotion) return;
 
-PopupCharacter.next=function(){
+  this.currentEmotion = emotion;
 
-    if(this.current>=this.queue.length){
+  target?.image?.setAttribute(
+    "src",
 
-        this.playing=false;
+    `assets/emoji/mochi/${emotion}.png`,
+  );
+};
 
-        return;
+PopupCharacter.type = function (text, speed = 28, bubble) {
+  clearInterval(this.typingTimer);
 
+  if (!bubble) return;
+
+  bubble.innerHTML = "";
+
+  let i = 0;
+
+  this.typingTimer = setInterval(() => {
+    if (i >= text.length) {
+      clearInterval(this.typingTimer);
+
+      return;
     }
 
-    const dialog=
+    bubble.innerHTML += text[i];
 
-        this.queue[this.current];
+    i++;
+  }, speed);
+};
 
-    this.say(dialog);
+PopupCharacter.say = function (dialog) {
+  const target = this.getTarget();
 
-    const speed=
+  if (!target?.bubble) return;
 
-        dialog.speed ?? this.defaultSpeed;
+  target.container?.classList.add("show");
 
-        const wait=
+  target.image?.classList.remove("gallery-popup-face-show");
+  target.image?.classList.add("gallery-popup-face-hide");
 
-        dialog.wait ??
+  target.bubble.classList.remove("gallery-popup-bubble-show");
 
-        dialog.message.length*speed+(dialog.stay ?? 1800);
+  clearTimeout(this.timer);
 
-    clearTimeout(
+  this.timer = setTimeout(() => {
+    this.changeEmotion(dialog.emotion, target);
 
-        this.queueTimer
+    target.image?.classList.remove("gallery-popup-face-hide");
 
-    );
+    target.image?.classList.add("gallery-popup-face-show");
 
-    this.queueTimer=setTimeout(()=>{
+    this.type(dialog.message, dialog.speed || 28, target.bubble);
 
-        this.current++;
+    target.bubble.classList.add("gallery-popup-bubble-show");
+  }, 180);
+};
 
-        this.next();
+PopupCharacter.hideAll = function () {
+  this.sceneContainer?.classList.remove("show");
 
-    },wait);
+  this.sceneBubble?.classList.remove("gallery-popup-bubble-show");
 
-}
+  this.bubble?.classList.remove("gallery-popup-bubble-show");
 
-PopupCharacter.changeEmotion=function(emotion){
+  if (this.sceneBubble) {
+    this.sceneBubble.innerHTML = "";
+  }
 
-    if(!emotion) return;
+  if (this.bubble) {
+    this.bubble.innerHTML = "";
+  }
 
-    this.currentEmotion=emotion;
+  if (this.sceneImage) {
+    this.sceneImage.classList.remove("gallery-popup-face-show", "gallery-popup-face-hide");
+  }
 
-    this.image.src=
+  if (this.image) {
+    this.image.classList.remove("gallery-popup-face-show", "gallery-popup-face-hide");
+  }
+};
 
-    `assets/emoji/mochi/${emotion}.png`;
+PopupCharacter.stop = function (options = {}) {
+  clearTimeout(this.queueTimer);
 
-}
+  clearTimeout(this.timer);
 
-// PopupCharacter.type=function(
+  clearInterval(this.typingTimer);
 
-//     text,
+  this.queue = [];
 
-//     speed=35
+  this.current = 0;
 
-// ){
+  this.playing = false;
 
-//     clearInterval(this.typingTimer);
+  this.activeTarget = null;
 
-//     this.bubble.innerHTML="";
+  if (options.preserveScene) {
+    if (this.sceneContainer) {
+      this.sceneContainer.classList.add("show");
+    }
 
-//     let i=0;
+    if (this.bubble) {
+      this.bubble.classList.remove("gallery-popup-bubble-show");
+      this.bubble.innerHTML = "";
+    }
 
-//     this.typingTimer=
+    if (this.image) {
+      this.image.classList.remove("gallery-popup-face-show", "gallery-popup-face-hide");
+    }
 
-//     setInterval(()=>{
+    return;
+  }
 
-//         if(i<text.length){
-
-//             this.bubble.innerHTML+=
-
-//             text.charAt(i);
-
-//             i++;
-
-//         }
-
-//         else{
-
-//             clearInterval(
-
-//                 this.typingTimer
-
-//             );
-
-//         }
-
-//     },speed);
-
-// }
-
-PopupCharacter.type=function(text,speed=28){
-
-    clearInterval(this.typingTimer);
-
-    this.bubble.innerHTML="";
-
-    let i=0;
-
-    this.typingTimer=setInterval(()=>{
-
-        if(i>=text.length){
-
-            clearInterval(this.typingTimer);
-
-            return;
-
-        }
-
-        this.bubble.innerHTML+=text[i];
-
-        i++;
-
-    },speed);
-
-}
-
-PopupCharacter.say=function(dialog){
-
-    console.log(dialog);
-
-    this.image.classList.remove("gallery-popup-face-show");
-    this.image.classList.add("gallery-popup-face-hide");
-
-    this.bubble.classList.remove("gallery-popup-bubble-show");
-
-    setTimeout(()=>{
-
-        PopupCharacter.changeEmotion(dialog.emotion);
-
-        PopupCharacter.image.classList.remove(
-            "gallery-popup-face-hide"
-        );
-
-        PopupCharacter.image.classList.add(
-            "gallery-popup-face-show"
-        );
-
-        PopupCharacter.type(dialog.message, dialog.speed || 28);
-
-        PopupCharacter.bubble.classList.add(
-            "gallery-popup-bubble-show"
-        );
-
-    },180);
-
-}
-
-PopupCharacter.stop=function(){
-
-    clearTimeout(this.queueTimer);
-
-    clearInterval(this.typingTimer);
-
-    this.queue=[];
-
-    this.current=0;
-
-    this.playing=false;
-
-}
+  this.hideAll();
+};

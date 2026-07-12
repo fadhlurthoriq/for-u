@@ -72,6 +72,13 @@ const GalleryDialog={
 
     ],
 
+    gallery:[
+        {
+            emotion:"happy",
+            message:"Hehe... kita mulai dari sini ya ❤️"
+        }
+    ],
+
     idleLong:[
 
         {

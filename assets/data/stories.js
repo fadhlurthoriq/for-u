@@ -38,25 +38,24 @@ const Stories={
             }
         ],
         
-        galleryDialog:[
+        galleryDialog:{
 
-        {
+            idle:[
+                { emotion:"love", message:"Aku masih inget hari ini ❤️" },
+                { emotion:"happy", message:"Lucu banget yaa foto ini." }
+            ],
 
-            emotion:"love",
+            next:[
+                { emotion:"happy", message:"Yuk lanjut ke foto selanjutnya ❤️" }
+            ],
 
-            message:"Aku masih inget hari ini ❤️"
+            close:[
+                { emotion:"happy", message:"Masih banyak lagi nih, yuk lanjut ❤️" }
+            ]
 
-        },
-
-        {
-
-            emotion:"happy",
-
-            message:"Lucu banget yaa foto ini."
+            // gak ada "prev" karena ini foto pertama
 
         }
-
-        ]
 
 
     },
@@ -74,6 +73,26 @@ const Stories={
             emotion:"angry",
 
             message:"mwwaahadad mwwaah ❤️"
+
+        },
+
+        galleryDialog:{
+
+            idle:[
+                { emotion:"happy", message:"Foto ini favorit aku." }
+            ],
+
+            next:[
+                { emotion:"thinking", message:"Foto berikutnya nih..." }
+            ],
+
+            prev:[
+                { emotion:"love", message:"Mau liat lagi yang tadi yaa?" }
+            ],
+
+            close:[
+                { emotion:"love", message:"Masih ada lagi loh ❤️" }
+            ]
 
         }
 

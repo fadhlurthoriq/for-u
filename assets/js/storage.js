@@ -3,23 +3,15 @@ const Storage = {};
 Storage.KEY = "for-u-save";
 
 Storage.defaultState = {
-
     scene: "login-scene",
-
     galleryIndex: 0,
-
     song: 0,
-
     musicTime: 0,
-
+    playing: false,
     popup: null,
-
     galleryState:{
-
         introFinished:false
-
     }
-
 };
 
 Storage.load = function () {

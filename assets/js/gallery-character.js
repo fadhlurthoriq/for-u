@@ -1,394 +1,217 @@
-const GalleryCharacter={
+const GalleryCharacter = {
+  state: "intro",
 
-    state:"intro",
+  introFinished: false,
 
-    introFinished:false,
+  idleTimer: null,
 
-    idleTimer:null,
+  randomTimer: null,
 
-    randomTimer:null,
+  currentCategory: null,
 
-    currentCategory:null,
+  enabled: true,
 
-    enabled:true,
+  idleDelayMin: 15000,
 
-    idleDelayMin:15000,
-
-    idleDelayMax:25000,
-
+  idleDelayMax: 25000,
 };
 
-GalleryCharacter.init=function(){
+GalleryCharacter.init = function () {
+  this.enabled = true;
 
-    this.enabled=true;
+  this.load();
+};
 
-    this.load();
+GalleryCharacter.playCategory = function (category) {
+  if (!GalleryDialog[category]) {
+    return;
+  }
 
-}
+  PopupCharacter.play(GalleryDialog[category],"scene");
+};
 
-GalleryCharacter.playCategory=function(category){
+GalleryCharacter.random = function (category) {
+  const list = GalleryDialog[category];
 
-    if(!GalleryDialog[category]){
+  if (!list) return null;
 
+  if (list.length === 0) return null;
+
+  return list[Math.floor(Math.random() * list.length)];
+};
+
+GalleryCharacter.randomDelay = function () {
+  return Math.floor(Math.random() * (this.idleDelayMax - this.idleDelayMin)) + this.idleDelayMin;
+};
+
+GalleryCharacter.playRandom = function (category) {
+  const dialog = this.random(category);
+
+  if (!dialog) return;
+
+  PopupCharacter.play(dialog,"scene");
+};
+
+GalleryCharacter.getPhotoDialog = function (index, category) {
+    const story = Gallery.story(index);
+    return story?.galleryDialog?.[category] || null;
+};
+
+GalleryCharacter.playForPhoto = function (index, category, fallbackCategory) {
+    const list = this.getPhotoDialog(index, category);
+
+    if (list && list.length) {
+        const dialog = list[Math.floor(Math.random() * list.length)];
+        PopupCharacter.play(dialog, "scene");
         return;
-
     }
 
-    PopupCharacter.play(
+    // kalau foto ini belum ada dialog custom, pakai dialog umum
+    this.playRandom(fallbackCategory || category);
+};
 
-        GalleryDialog[category]
+GalleryCharacter.changeState = function (state) {
+  this.state = state;
+};
 
-    );
+GalleryCharacter.stop = function () {
+  clearTimeout(this.idleTimer);
 
-}
+  clearTimeout(this.randomTimer);
+};
 
-GalleryCharacter.random=function(category){
+GalleryCharacter.resume = function () {
+  this.enabled = true;
 
-    const list=
+  if (this.state === "idle") {
+    this.scheduleIdle();
+  }
+};
 
-        GalleryDialog[category];
+GalleryCharacter.pause = function () {
+  this.enabled = false;
 
-    if(!list) return null;
+  this.stop();
+};
 
-    if(list.length===0) return null;
+GalleryCharacter.save = function () {
+  const save = Storage.load();
 
-    return list[
+  save.galleryState = {
+    introFinished: this.introFinished,
+  };
 
-        Math.floor(
+  Storage.save(save);
+};
 
-            Math.random()*list.length
+GalleryCharacter.load = function () {
+  const save = Storage.load();
 
-        )
+  this.introFinished = save.galleryState?.introFinished ?? false;
+};
 
-    ];
-
-}
-
-GalleryCharacter.randomDelay=function(){
-
-    return Math.floor(
-
-        Math.random()*
-
-        (
-
-            this.idleDelayMax-
-
-            this.idleDelayMin
-
-        )
-
-    )+
-
-    this.idleDelayMin;
-
-}
-
-GalleryCharacter.playRandom=function(category){
-
-    const dialog=
-
-        this.random(category);
-
-    if(!dialog) return;
-
-    PopupCharacter.play(
-
-        dialog
-
-    );
-
-}
-
-GalleryCharacter.changeState=function(state){
-
-    this.state=state;
-
-}
-
-GalleryCharacter.stop=function(){
-
-    clearTimeout(
-
-        this.idleTimer
-
-    );
-
-    clearTimeout(
-
-        this.randomTimer
-
-    );
-
-}
-
-GalleryCharacter.resume=function(){
-
-    this.enabled=true;
-
-    if(
-
-        this.state==="idle"
-
-    ){
-
-        this.scheduleIdle();
-
-    }
-
-}
-
-GalleryCharacter.pause=function(){
-
-    this.enabled=false;
-
-    this.stop();
-
-}
-
-GalleryCharacter.save=function(){
-
-    const save=Storage.load();
-
-    save.galleryState={
-
-        introFinished:this.introFinished
-
-    };
-
-    Storage.save(save);
-
-}
-
-GalleryCharacter.load=function(){
-
-    const save=Storage.load();
-
-    this.introFinished=
-        save.galleryState?.introFinished ?? false;
-
-}
-
-GalleryCharacter.enter=function(){
-
-    if(this.introFinished){
-
-        this.startIdle();
-
-        return;
-
-    }
-
-    this.startIntro();
-
-}
-
-GalleryCharacter.startIntro=function(){
-
-    this.changeState("intro");
-
-    this.playCategory(
-
-        "intro"
-
-    );
-
-    const wait=
-
-        GalleryDialog.intro.length
-
-        *3200;
-
-    setTimeout(()=>{
-
-        this.finishIntro();
-
-    },wait);
-
-}
-
-GalleryCharacter.finishIntro=function(){
-
-    this.introFinished=true;
-
-    this.save();
-
+GalleryCharacter.enter = function () {
+  if (this.introFinished) {
     this.startIdle();
+    this.playForPhoto(Gallery.current, "idle");
+    return;
+  }
+  this.startIntro();
+};
 
-}
+GalleryCharacter.startIntro = function () {
+  this.changeState("intro");
 
-GalleryCharacter.startIdle=function(){
+  this.playCategory("intro");
 
-    this.changeState("idle");
+  const wait = GalleryDialog.intro.length * 3200;
 
+  setTimeout(() => {
+    this.finishIntro();
+  }, wait);
+};
+
+GalleryCharacter.finishIntro = function () {
+  this.introFinished = true;
+
+  this.save();
+
+  this.startIdle();
+};
+
+GalleryCharacter.startIdle = function () {
+  this.changeState("idle");
+
+  this.scheduleIdle();
+};
+
+GalleryCharacter.playIdle = function () {
+    if (!this.enabled) return;
+    this.playForPhoto(Gallery.current, "idle");
     this.scheduleIdle();
+};
 
-}
+GalleryCharacter.scheduleIdle = function () {
+  clearTimeout(this.idleTimer);
 
-GalleryCharacter.playIdle=function(){
-
-    if(!this.enabled){
-
-        return;
-
-    }
-
-    this.playRandom(
-
-        "idle"
-
-    );
-
-    this.scheduleIdle();
-
-}
-
-GalleryCharacter.scheduleIdle=function(){
-
-    clearTimeout(
-
-        this.idleTimer
-
-    );
-
-    this.idleTimer=setTimeout(()=>{
-
-        this.playIdle();
-
+  this.idleTimer = setTimeout(
+    () => {
+      this.playIdle();
     },
 
-    this.randomDelay());
+    this.randomDelay(),
+  );
+};
 
-}
-
-GalleryCharacter.on=function(event,data=null){
-
-    switch(event){
-
-        case "next":
-
-            this.onNext();
-
-        break;
-
-        case "prev":
-
-            this.onPrev();
-
-        break;
-
-        case "popupOpen":
-
-            this.onPopupOpen(data);
-
-        break;
-
-        case "popupClose":
-
-            this.onPopupClose();
-
-        break;
-
+GalleryCharacter.on = function (event, data = null) {
+    switch (event) {
+        case "next": this.onNext(data); break;
+        case "prev": this.onPrev(data); break;
+        case "popupOpen": this.onPopupOpen(data); break;
+        case "popupClose": this.onPopupClose(data); break;
     }
+};
 
-}
+GalleryCharacter.onNext = function (index) {
+    this.playForPhoto(index, "next");
+};
 
-GalleryCharacter.onNext=function(){
+GalleryCharacter.onPrev = function (index) {
+    if (!this.enabled) return;
+    this.playForPhoto(index, "prev");
+};
 
-    if(Math.random()>0.35){
-
-        return;
-
-    }
-
-    this.playRandom("next");
-
-}
-
-GalleryCharacter.onPrev=function(){
-
-    if(!this.enabled) return;
-
-    this.playRandom("prev");
-
-}
-
-GalleryCharacter.onPopupOpen=function(index){
-
-    this.pause();
-
-}
-
-GalleryCharacter.onPopupClose=function(){
-
+GalleryCharacter.onPopupClose = function (index) {
     this.resume();
+    this.playForPhoto(index, "close", "popupClose");
+};
 
-}
+GalleryCharacter.onPopupOpen = function (index) {
+  this.pause();
+};
 
-GalleryCharacter.onPhoto=function(index){
+GalleryCharacter.onPhoto = function (index) {
+  if (index === this.lastIndex) {
+    return;
+  }
 
-    if(index===this.lastIndex){
+  this.lastIndex = index;
 
-        return;
+  const story = Gallery.story(index);
 
-    }
+  if (!story || !story.galleryDialog) {
+    return;
+  }
 
-    this.lastIndex=index;
+  this.playRandomFrom(story.galleryDialog);
+};
 
-    const story=
+GalleryCharacter.playRandomFrom = function (list) {
+  if (!list || list.length === 0) {
+    return;
+  }
 
-        Gallery.story(index);
+  const dialog = list[Math.floor(Math.random() * list.length)];
 
-    if(
-
-        !story ||
-
-        !story.galleryDialog
-
-    ){
-
-        return;
-
-    }
-
-    this.playRandomFrom(
-
-        story.galleryDialog
-
-    );
-
-}
-
-GalleryCharacter.playRandomFrom=
-
-function(list){
-
-    if(
-
-        !list ||
-
-        list.length===0
-
-    ){
-
-        return;
-
-    }
-
-    const dialog=
-
-    list[
-
-        Math.floor(
-
-            Math.random()*
-
-            list.length
-
-        )
-
-    ];
-
-    PopupCharacter.play(dialog);
-
-}
+  PopupCharacter.play(dialog,"scene");
+};
