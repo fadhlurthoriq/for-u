@@ -5,7 +5,6 @@ const Dialogs = {
         intro:{
             emotion:"waving",
             message:"Haiii! Kenalin aku Mochi 🐱❤️ Aku yang nemenin kamu disini gantiin thoriq sementara yaah...",
-            duration:6000
         },
 
         focusUsername:{

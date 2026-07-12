@@ -27,6 +27,7 @@ Music.init = function () {
     this.timeTotalEl = document.getElementById("player-time-total");
 
     this.bind();
+    this.bindVisibility();
     this.restore();
 
 };
@@ -57,6 +58,22 @@ Music.bind = function () {
     });
 
     this.progressBar.onclick = (e) => this.seek(e);
+
+};
+
+Music.bindVisibility = function () {
+
+    document.addEventListener("visibilitychange", () => {
+
+        if (document.hidden) {
+            this.wasPlayingBeforeHidden = !this.audio.paused;
+
+            if (this.wasPlayingBeforeHidden) this.pause();
+        } else {
+            if (this.wasPlayingBeforeHidden) this.play();
+        }
+
+    });
 
 };
 

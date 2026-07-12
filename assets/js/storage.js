@@ -16,7 +16,7 @@ Storage.defaultState = {
 
 Storage.load = function () {
 
-    const raw = localStorage.getItem(this.KEY);
+    const raw = sessionStorage.getItem(this.KEY);
 
     if (!raw) {
 
@@ -50,7 +50,7 @@ Storage.load = function () {
 
 Storage.save = function (state) {
 
-    localStorage.setItem(
+    sessionStorage.setItem(
 
         this.KEY,
 
@@ -80,7 +80,7 @@ Storage.update = function (partial) {
 
 Storage.isFirstOpen=function(){
 
-    return localStorage.getItem(
+    return sessionStorage.getItem(
 
         this.KEY
 
@@ -90,7 +90,7 @@ Storage.isFirstOpen=function(){
 
 Storage.reset = function () {
 
-    localStorage.removeItem(
+    sessionStorage.removeItem(
 
         this.KEY
 

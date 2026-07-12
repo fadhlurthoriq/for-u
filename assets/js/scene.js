@@ -34,11 +34,11 @@ Scene.show = function (id) {
 
     Scene.clearTimers();
 
-    if(id==="login-scene" && !App.restoring){
+    if(id==="login-scene"){
 
         setTimeout(()=>{
 
-            Character.introduction();
+            Character.dialog("login.intro");
 
         },400);
 

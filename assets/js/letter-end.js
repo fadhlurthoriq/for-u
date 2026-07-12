@@ -9,7 +9,7 @@ const LetterEnd = {
 
 LetterEnd.dialogQueue = [
   { emotion: "thinking", message: "Udah sampai bagian terakhir suratnya nih..." },
-  { emotion: "shy", message: "Aku jadi agak deg-degan mau nanya ini." },
+  { emotion: "apologizing", message: "Aku jadi agak deg-degan mau nanya ini." },
   { emotion: "hopeful", message: "Kamu masih mau lanjut ke tahap berikutnya, atau mau baca-baca lagi dulu?" },
 ];
 
