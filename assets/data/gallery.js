@@ -24,6 +24,8 @@ const GalleryData=[
 
 {image:"assets/img/gallery/12.jpg", sticker:"flower"},
 
-{image:"assets/img/gallery/13.png", sticker:"flower"},
+{image:"assets/img/gallery/14.jpg", sticker:"flower"},
+
+{image:"assets/img/gallery/13.jpg", sticker:"flower"},
 
 ];

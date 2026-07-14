@@ -5,7 +5,7 @@ const Stories={
             title:"Kamu siapa?",
             date:"27 November 2025",
             memory:`
-                Inget hari ini ney? Pertama kali kita ketemu lo ini. Aku masi inget, tiba tiba ada unknown number chat aku pas maghrib maghrib kalo ngga abis isya gitu, dia kirim stiker itu hahaa, aku awalnya ngiranya paling temen temen pondokku, belum pernah ku save dulu. Ternyata oh ternyata, orang itu jadi yang paling aku sayang deh sekarang hahahaa. Hari itu aku juga chat pardan "tanya kenal arek iki a", kamu tau kenapa aku tanya pardan? Soalnya username kamu waktu itu mirip sama anak yang deketin pardan, nama depannya juga ney. Pardan bilang, "guduk iku bedo, guduk ney seng nyedek i aku, iku konco smp ku" gituu. Ngga lama setelah itu nanang juga chat, bilang kalo dia kasihin no ku ke temennya, yaudah aku bilang ngga papa gitu hehehe. Ahh lucu juga yah dulu kita awal kenal, yang aku bilang kalo aku bukan toriq trus kamu percaya HAHAHAHAA. So cute neyy 😜 `,
+                Inget hari ini ney? Pertama kali kita ketemu lo ini. Aku masi inget, tiba tiba ada unknown number chat aku pas maghrib maghrib kalo ngga abis isya gitu, dia kirim stiker itu hahaa, aku awalnya ngiranya paling temen temen pondokku, belum pernah ku save dulu. Ternyata oh ternyata, orang itu jadi yang paling aku sayang deh sekarang hahahaa. Hari itu aku juga chat pardan tanya "kenal arek iki a", kamu tau kenapa aku tanya pardan? Soalnya username kamu waktu itu mirip sama anak yang deketin pardan, nama depannya juga ney. Pardan bilang, "guduk iku bedo, guduk ney seng nyedek i aku, iku konco smp ku" gituu. Ngga lama setelah itu nanang juga chat, bilang kalo dia kasihin no ku ke temennya, yaudah aku bilang ngga papa gitu hehehe. Ahh lucu juga yah dulu kita awal kenal, yang aku bilang kalo aku bukan toriq trus kamu percaya HAHAHAHAA. So cute neyy 😜 `,
 
             popup:[
                 {emotion:"shock",message:"kamu siapa?",},
@@ -320,7 +320,7 @@ const Stories={
         },
         {
             title:"CANTIK BGTT!!",
-            date:"",
+            date:"7 April 2026",
             memory:`
             AAKK INI SUMPAH NEEY, CANTIIK BGTT, yaa itu batin pertama yang muncul dari hati ku. Hhahaha heran tambah hari kamu kok cantik nya juga nambah, tapi beneran ney emang secantik itu kamu. Daan.. chat kita berlanjut terus dari hari ke hari sejak idul fitri itu, mulai saling kirim pap, saling tanya kabar, gudmorning gudnaig, dann banyak lagi lah. Naah dari semua pap yang kamu kasi pas masa masa itu, aku paling suka yang inii, entah kenapa yah kaya manis unyu imutt gitu loh. Ini juga pap dari kamu yang aku buat stiker pertama itu, eh apa yang pas idul fitri itu yah. Kaya e yang pas idul fitri itu deh yang aku pake, tapi ngga selang beberapa lama, aku juga pake ini buat stiker. Ini jaman jaman aku belum mengakui kamu yang tante tante itu kan yaah hahahahaa, tapi emang sebocil itu ney kamu di mata ku. Yaa sekarang pun aku ngga mengakui si kalo kamu kaya tante tante, tetep kaya bocil kok. Aku ngga tau tampilan tante tante yang kamu maksud itu gimana, tapi aku ngga merasa kalo itu kaya tante tante, pernah si sekali, tapi aku liat sekarang ya sama aja kek bocil. Kaya gimana yah ney, ga bisa gede kamu di mata ku ituu, always unyuu sayaang. Wleee 🤪`,
 
@@ -354,7 +354,7 @@ const Stories={
         },
         {
             title:"Maaf yah..",
-            date:"",
+            date:"18 Mei 2026",
             memory:`
             Pertama yang kurasain pas itu, yaa emang ada sebel sebel nya dikit si, tapi aku ngga marah samsek ney, ngga bisa aku marah sampe segitunya ke kamu, bahkan sekarang ini aku ngga marah samsek ke kamu kok. Sebenarnya ada 2 alasan doang si aku ngilang itu, satu karena aku agak sebel sama kamu, itu sebenarnya udah aku pendam dari lama, tapi aku biarin soalnya yaa masi aku maklumin, tapi pas itu kaya puncak sebelku bgt gitu, aku juga mau kasi kamu hukuman ngga kukabarin dan kuchat samsek. Kedua itu, aku mau tau apakah kalo aku ngilang, kamu masi cari ga yah, hahahaa anak kecil bgt yah pikiran ku, tapi percaya lah ney aku sayang bgt sama kamu, makanya aku sampe mau memastikan itu. Awalnya emang agak sedih si ditinggal, aku juga berat, tapi yaa gimana lagi, aku mau kasi kamu semacam punishment. Maaf juga ya keegoisan ku pas itu, padahal kamu juga sebel ke aku dan udah dipendam pendam juga dari dulu, tapi malah aku juga yang gitu. Maaf yaa sayaang buat sikapku yang egois dan susah ngertiin kamu, sejak hari itu aku udah mutusin buat lebih terbuka bgt ke kamu, aku sebenarnya sebelum sebelumnya itu udah terbuka, cuman ngga pernah cerita aja kalo aku ada masalah atau ada yang lain.`,
             
@@ -388,7 +388,7 @@ const Stories={
         },
         {
             title:"Waaw ney ternyata..",
-            date:"",
+            date:"18 Juni 2026",
             memory:`
             Nahh ini juga ni, salah satu part yang paling bikin aku melongo pas itu. Emang si aku udah tau kalo cewe nya itu biasanya lebih gragas dari pada cowo nya, buut yang aku paling ngga expect itu, ternyata kamu se nggragas ini yah neyy. HAHAHAA cute si kalo kata ku, kaya gimana yah, ngga tau kaya lucu aja, suka gitu aku liat nya. Coba kalo cewe lain yang gitu ke aku, langsung ilfil dan benci aku ney ke mereka, tapi kamuu... Awalnya itu gini ney "koyo e ney iki yo nggragas deh, coba se tak pancing pancing" itu batin ku dalam hati pas pertama kali aku mau coba pancing kamu, lakok ternyata kamu nya lebih nggragas lo daripada aku, ngga kok aku ngga takut ney. AKU SUKAA. Heyy kamu jangan berpikiran negatif dulu yah mikir kalo aku cowo ga bener dan ngelakuin ini semua ke cewe lain, engga ney ini cuman ke kamu, suwer deh. Chat itu pertama kalinya kita mulai saling pancing memancing kan hehee, yaa walaupun cuman dari kata kata si, tapi bisa sampe bikin aku sedikit terpancing, kamu hebat ney. "hmm sangar pisan ney tibak e, kok kepancing yo aku" itu batinku pas itu. HAHAHAHAA maaf yah kalo aku juga cabul, kalo risih ngga usah gitu lagi ngga papaa kook 😔`,
 
@@ -408,7 +408,7 @@ const Stories={
                     { emotion:"shy", message:"nggragas bgt si sayaang" }
                 ],
                 next:[
-                    { emotion:"guilty", message:"penutupnya nii" }
+                    { emotion:"guilty", message:"SOO CUTEE aslii" }
                 ],
 
                 prev:[
@@ -421,8 +421,42 @@ const Stories={
             }
         },
         {
+            title:"SOO CUTEE",
+            date:"8 Juni 2026",
+            memory:`
+            "IHH KOK LUCUU BGTT SII", yapp itu yang pertama kali aku batin pas lihat foto yang kamu kirim ini, itu kamu up di close friend kan. Akkk seneng bgtt lo rasanya dipost itu, kek "anjayy guwe nih, ni cewe guwe lu smua minggir" HAHAHAA. Makasi ya ney kamu udah ngelakuin itu buat aku, tapi maaf aku ngga bisa ngelakuin itu balik ke kamu, kupost di sw kata kamu jangan soalnya pas itu. Aku anaknya emang ga suka main ig ma tiktok ney, ngga tau yah kenapa, kaya ga suka aja gitu. Lebih asyik main game sama tidur, oh olahraga juga enak si, nongkrong ma anak anak juga enak, kapan kapan kalau kamu mau, sama aku yuk ngopi ngga papaa, aku luangin waktu sayaang, aku bakal berusaha juga buat kamuu. AAKK sumpah aku lo masi senyum senyum sendiri sampe sekarang tau kamu post aku di ig kamu itu, hahahaa. Makasii yah buat semua nya neyy, ngga tau bisa bilang apa lagi aku, pokoknya aku sayang sama kamu. Always love u more more and more 😁 `, 
+
+            popup:[
+                {
+                    emotion:"guilty",
+                    message:"terharuu"
+                },
+                {
+                    emotion:"thanks",
+                    message:"makasii sayaang.."
+                }
+            ],
+
+            galleryDialog:{
+                idle:[
+                    { emotion:"happy", message:"lucuu bgtt yaa" }
+                ],
+                next:[
+                    { emotion:"guilty", message:"penutupnya nii" }
+                ],
+
+                prev:[
+                    { emotion:"thinking", message:"kiww kiww" }
+                ],
+
+                close:[
+                    { emotion:"hopeful", message:"bagian terakhir abis ini" }
+                ]
+            }
+        },
+        {
             title:"Yaah begitulah..",
-            date:"",
+            date:"4 Juli 2026",
             memory:`
             Akhirnya sampe di part terakhir sekarang. Haii neyy, makasi ya udah mau meluangkan waktu buat baca baca. Hmm aku mau minta maaf ney, buat sikapku yang mungkin egois dan ngga mikirin kamu juga, tapi kamu harus percaya ney kalo aku bener bener sesayang itu sama kamu, udah ga minat aku deketin cewe lain. Sudah sejauh ini dan kamu sudah tau hampir semua dari diriku ney, mulai dari keseharian, sikap sifat, segala bentuk wajah ku, dan masih banyak lagi deh. Aku udah milih buat percaya kamu dari dulu ney, sejak idul fitri itu, soalnya kamu udah ngasi aku kesempatan lagi pas itu, maka aku percaya ke kamu pas itu. Kamu juga pas itu udah kasi aku kesempatan, maka sekarang aku ngga maksa apapun pilihan kamu ney. Ada 2 pilihan kamu, pertama tinggalin aja aku yang berantakan dan awur awur an ini, cari orang yang lebih bisa ngertiin kamu lagi ney, kamu juga harus happy. Kedua tolong perbaiki semua kesalahan ku, bilang ke aku harus gimana, perbaiki bersama ney. Emang aku udah berkali kali bikin kamu kecewa kok, tapi percayalah di tiap kehancuran itu pasti nanti akan lebih kuat jika diperbaiki. Aku ngga memaksa pilihan kamu, it's up to u. Makasi ya udah mau meluangkan waktu sampe sini 😊`,
 

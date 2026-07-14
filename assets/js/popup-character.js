@@ -108,9 +108,13 @@ PopupCharacter.play = function (dialogs, target = "auto") {
 
 PopupCharacter.next = function () {
   if (this.current >= this.queue.length) {
-    this.playing = false;
+    if (this.activeTarget === "popup" && this.queue.length > 0) {
+      this.current = 0;
+    } else {
+      this.playing = false;
 
-    return;
+      return;
+    }
   }
 
   const dialog = this.queue[this.current];
@@ -119,7 +123,7 @@ PopupCharacter.next = function () {
 
   const speed = dialog.speed ?? this.defaultSpeed;
 
-  const wait = dialog.wait ?? dialog.message.length * speed + (dialog.stay ?? 1800);
+  const wait = dialog.wait ?? dialog.message.length * speed + (dialog.stay ?? 3000);
 
   clearTimeout(this.queueTimer);
 
