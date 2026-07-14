@@ -128,7 +128,7 @@ Letter.showHint = function () {
   this.mochiImage.src = "assets/emoji/mochi/waving.png";
   this.mochiBubble.classList.add("gallery-popup-bubble-show");
   this.mochiWrapper.classList.add("show");
-  this.typeText("Scroll ke bawah buat lanjut, scroll ke atas buat balik lagi ✨");
+  this.typeText("scroll ke bawah buat lanjut, scroll ke atas buat balik lagi");
 };
 
 Letter.next = function () {

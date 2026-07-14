@@ -11,9 +11,9 @@ const GalleryCharacter = {
 
   enabled: true,
 
-  idleDelayMin: 15000,
+  idleDelayMin: 3000,
 
-  idleDelayMax: 25000,
+  idleDelayMax: 8000,
 };
 
 GalleryCharacter.init = function () {
@@ -188,30 +188,4 @@ GalleryCharacter.onPopupClose = function (index) {
 
 GalleryCharacter.onPopupOpen = function (index) {
   this.pause();
-};
-
-GalleryCharacter.onPhoto = function (index) {
-  if (index === this.lastIndex) {
-    return;
-  }
-
-  this.lastIndex = index;
-
-  const story = Gallery.story(index);
-
-  if (!story || !story.galleryDialog) {
-    return;
-  }
-
-  this.playRandomFrom(story.galleryDialog);
-};
-
-GalleryCharacter.playRandomFrom = function (list) {
-  if (!list || list.length === 0) {
-    return;
-  }
-
-  const dialog = list[Math.floor(Math.random() * list.length)];
-
-  PopupCharacter.play(dialog,"scene");
 };

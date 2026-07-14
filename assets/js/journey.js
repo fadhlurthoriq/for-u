@@ -88,8 +88,6 @@ Journey.showGallery=function(){
 
         Overlay.hideJourney();
 
-        GalleryCharacter.playCategory("gallery");
-
     },800);
 
 }

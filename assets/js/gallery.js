@@ -27,6 +27,7 @@ Gallery.popupMemory = null;
 Gallery.popupClose = null;
 
 Gallery.init = function () {
+
   this.track = document.getElementById("gallery-track");
 
   this.prev = document.getElementById("gallery-prev");
@@ -40,6 +41,8 @@ Gallery.init = function () {
   this.popup = document.getElementById("gallery-popup");
 
   this.popupImage = document.getElementById("gallery-popup-image");
+
+  this.popupVideo = document.getElementById("gallery-popup-video");
 
   this.popupTitle = document.getElementById("gallery-popup-title");
 
@@ -61,18 +64,35 @@ Gallery.init = function () {
 Gallery.render = function () {
   let html = "";
 
-  this.data.forEach((photo, index) => {
-    html += `
+  this.data.forEach((item, index) => {
+    if (item.type === "video") {
+      html += `
+
+        <div class="gallery-item">
+
+            <div class="gallery-video-thumb gallery-clickable" data-index="${index}">
+
+                <img class="gallery-photo" src="${item.thumbnail}" alt="">
+
+                <div class="gallery-play-icon">▶</div>
+
+            </div>
+
+        </div>
+
+        `;
+    } else {
+      html += `
 
         <div class="gallery-item">
 
             <img
 
-                class="gallery-photo"
+                class="gallery-photo gallery-clickable"
 
-                src="${photo.image}"
+                src="${item.image}"
 
-                alt="${photo.title}"
+                alt=""
 
                 data-index="${index}"
 
@@ -81,6 +101,7 @@ Gallery.render = function () {
         </div>
 
         `;
+    }
   });
 
   this.track.innerHTML = html;
@@ -89,9 +110,9 @@ Gallery.render = function () {
     this.total.innerHTML = this.data.length;
   }
 
-  document.querySelectorAll(".gallery-photo").forEach((photo) => {
-    photo.onclick = () => {
-      const index = photo.dataset.index;
+  document.querySelectorAll(".gallery-clickable").forEach((el) => {
+    el.onclick = () => {
+      const index = el.dataset.index;
 
       Gallery.openPopup(index);
     };
@@ -113,9 +134,25 @@ Gallery.story = function (index) {
 Gallery.openPopup = function (index) {
     const data = Gallery.get(index);
 
-    this.openIndex = index; // ⬅️ TAMBAH INI
+    this.openIndex = index;
 
-    this.popupImage.src = data.photo.image;
+    if (data.photo.type === "video") {
+        this.popupImage.style.display = "none";
+
+        this.popupVideo.style.display = "block";
+        this.popupVideo.poster = data.photo.thumbnail || "";
+        this.popupVideo.src = data.photo.video;
+        this.popupVideo.currentTime = 0;
+        this.popupVideo.play().catch(() => {});
+    } else {
+        this.popupVideo.pause();
+        this.popupVideo.removeAttribute("src");
+        this.popupVideo.style.display = "none";
+
+        this.popupImage.style.display = "block";
+        this.popupImage.src = data.photo.image;
+    }
+
     this.popupTitle.innerHTML = data.story.title;
     this.popupDate.innerHTML = data.story.date;
     this.popupMemory.innerHTML = data.story.memory;
@@ -134,9 +171,12 @@ Gallery.openPopup = function (index) {
 Gallery.closePopup = function () {
     PopupCharacter.stop({ preserveScene: true });
 
+    this.popupVideo.pause();
+    this.popupVideo.currentTime = 0;
+
     this.popup.classList.remove("show");
 
-    GalleryCharacter.on("popupClose", this.openIndex); // ⬅️ KIRIM INDEX
+    GalleryCharacter.on("popupClose", this.openIndex);
 
     Storage.update({ popup: null });
 

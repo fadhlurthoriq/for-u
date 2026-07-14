@@ -1880,6 +1880,42 @@ GALLERY POPUP*==========================*/
     transform 0.25s ease;
 }
 
+.gallery-video-thumb {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+}
+
+.gallery-video-thumb .gallery-photo {
+  display: block;
+}
+
+.gallery-play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 64px;
+  height: 64px;
+
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 24px;
+
+  pointer-events: none;
+}
+
 .gallery-popup-face-show {
   opacity: 1;
 
@@ -2531,11 +2567,70 @@ ENDING SCENE
 /* ---- Gift stage: berdiri sendiri, mirip envelope ---- */
 
 .ending-gift-stage {
+  position: relative;
+  z-index: 5;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 22px;
   transition: opacity 0.4s ease;
+}
+
+.ending-farewell-mochi {
+  position: absolute;
+  bottom: 40px;
+  left: 80px;
+  width: 240px;
+  height: 240px;
+  z-index: 6;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.ending-farewell-mochi.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+#ending-farewell-mochi-image {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+#ending-farewell-mochi-bubble {
+  position: absolute;
+  bottom: 220px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 320px;
+  min-width: 180px;
+  padding: 18px;
+  background: #fff6f8;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #222 !important;
+  border-radius: 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.ending-farewell-mochi.show #ending-farewell-mochi-bubble {
+  opacity: 1;
+}
+
+#ending-farewell-mochi-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 12px solid transparent;
+  border-top: 12px solid #fff6f8;
 }
 
 .ending-mochi {
@@ -2687,3 +2782,303 @@ ENDING SCENE
   font-weight: 700;
   font-size: 14px;
 }
+
+/* Soal tipe: emoji scale */
+.question-emoji-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 8px;
+
+  padding: 32px 24px 36px;
+}
+
+.question-emoji-btn {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+
+  cursor: pointer;
+}
+
+.emoji-icon {
+  font-size: 34px;
+  display: inline-block;
+
+  transition: transform 0.2s ease;
+}
+
+.question-emoji-btn:hover .emoji-icon {
+  transform: scale(1.25) translateY(-4px);
+}
+
+.question-emoji-btn.selected .emoji-icon {
+  transform: scale(1.35) translateY(-6px);
+}
+
+.emoji-tooltip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+
+  background: #2b2b2b;
+  color: #fff;
+
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+
+  padding: 6px 10px;
+  border-radius: 10px;
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.question-emoji-btn:hover .emoji-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.emoji-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  border: 5px solid transparent;
+  border-top-color: #2b2b2b;
+}
+
+/* Soal tipe: yes/no dodge */
+.question-yesno-zone {
+  position: relative;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+
+  min-height: 220px;
+  overflow: hidden;
+
+  padding: 24px;
+}
+
+.question-yes-btn,
+.question-no-btn {
+  padding: 14px 30px;
+
+  border: none;
+  border-radius: 40px;
+
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease;
+}
+
+.question-yes-btn {
+  background: #ff8da1;
+  color: #fff;
+}
+
+.question-yes-btn:hover {
+  background: #ff6f89;
+}
+
+.question-no-btn {
+  background: #f1e4e7;
+  color: #666;
+}
+
+.question-no-btn.dodging {
+  transition:
+    left 0.25s ease,
+    top 0.25s ease;
+}
+
+#ending-floating-photos {
+  position: fixed;
+  inset: 0;
+
+  overflow: hidden;
+  pointer-events: none;
+
+  z-index: 1;
+
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+#ending-floating-photos.show {
+  opacity: 1;
+}
+
+.ending-float-photo {
+  position: absolute;
+
+  width: 70px;
+  height: 70px;
+
+  object-fit: cover;
+  border-radius: 14px;
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+
+  opacity: 0;
+}
+
+#gallery-popup-video {
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  display: none;
+}
+
+@keyframes floatPath1 {
+  0% { transform: translate(110vw, -20vh) rotate(-8deg); opacity: 0; }
+  10% { opacity: 0.9; }
+  90% { opacity: 0.9; }
+  100% { transform: translate(-30vw, 120vh) rotate(10deg); opacity: 0; }
+}
+
+@keyframes floatPath2 {
+  0% { transform: translate(-30vw, -20vh) rotate(6deg); opacity: 0; }
+  10% { opacity: 0.9; }
+  90% { opacity: 0.9; }
+  100% { transform: translate(110vw, 120vh) rotate(-10deg); opacity: 0; }
+}
+
+@keyframes floatPath3 {
+  0% { transform: translate(110vw, 120vh) rotate(4deg); opacity: 0; }
+  10% { opacity: 0.85; }
+  90% { opacity: 0.85; }
+  100% { transform: translate(-30vw, -20vh) rotate(-6deg); opacity: 0; }
+}
+
+@keyframes floatPath4 {
+  0% { transform: translate(-30vw, 120vh) rotate(-5deg); opacity: 0; }
+  10% { opacity: 0.85; }
+  90% { opacity: 0.85; }
+  100% { transform: translate(110vw, -20vh) rotate(8deg); opacity: 0; }
+}
+
+@keyframes floatPath5 {
+  0% { transform: translate(20vw, -20vh) rotate(3deg); opacity: 0; }
+  10% { opacity: 0.9; }
+  90% { opacity: 0.9; }
+  100% { transform: translate(60vw, 120vh) rotate(-4deg); opacity: 0; }
+}
+
+@keyframes floatPath6 {
+  0% { transform: translate(70vw, 120vh) rotate(-3deg); opacity: 0; }
+  10% { opacity: 0.9; }
+  90% { opacity: 0.9; }
+  100% { transform: translate(30vw, -20vh) rotate(5deg); opacity: 0; }
+}
+
+@keyframes floatPath7 {
+  0% { transform: translate(-30vw, 20vh) rotate(-5deg); opacity: 0; }
+  10% { opacity: 0.85; }
+  90% { opacity: 0.85; }
+  100% { transform: translate(110vw, 90vh) rotate(9deg); opacity: 0; }
+}
+
+@keyframes floatPath8 {
+  0% { transform: translate(110vw, 20vh) rotate(5deg); opacity: 0; }
+  10% { opacity: 0.85; }
+  90% { opacity: 0.85; }
+  100% { transform: translate(-30vw, 90vh) rotate(-9deg); opacity: 0; }
+}
+
+@keyframes floatPath9 {
+  0% { transform: translate(40vw, -20vh) rotate(4deg); opacity: 0; }
+  10% { opacity: 0.9; }
+  90% { opacity: 0.9; }
+  100% { transform: translate(10vw, 120vh) rotate(-6deg); opacity: 0; }
+}
+
+@keyframes floatPath10 {
+  0% { transform: translate(10vw, 120vh) rotate(-4deg); opacity: 0; }
+  10% { opacity: 0.9; }
+  90% { opacity: 0.9; }
+  100% { transform: translate(40vw, -20vh) rotate(6deg); opacity: 0; }
+}
+
+@keyframes floatPath11 {
+  0% { transform: translate(-30vw, 60vh) rotate(6deg); opacity: 0; }
+  10% { opacity: 0.85; }
+  90% { opacity: 0.85; }
+  100% { transform: translate(110vw, 10vh) rotate(-8deg); opacity: 0; }
+}
+
+@keyframes floatPath12 {
+  0% { transform: translate(110vw, 60vh) rotate(-6deg); opacity: 0; }
+  10% { opacity: 0.85; }
+  90% { opacity: 0.85; }
+  100% { transform: translate(-30vw, 10vh) rotate(8deg); opacity: 0; }
+}
+
+@keyframes floatPath13 {
+  0% { transform: translate(80vw, -20vh) rotate(3deg); opacity: 0; }
+  10% { opacity: 0.9; }
+  90% { opacity: 0.9; }
+  100% { transform: translate(-10vw, 120vh) rotate(-5deg); opacity: 0; }
+}
+
+@keyframes floatPath14 {
+  0% { transform: translate(-10vw, -20vh) rotate(-3deg); opacity: 0; }
+  10% { opacity: 0.9; }
+  90% { opacity: 0.9; }
+  100% { transform: translate(80vw, 120vh) rotate(5deg); opacity: 0; }
+}
+
+@keyframes floatPath15 {
+  0% { transform: translate(60vw, 120vh) rotate(5deg); opacity: 0; }
+  10% { opacity: 0.85; }
+  90% { opacity: 0.85; }
+  100% { transform: translate(90vw, -20vh) rotate(-7deg); opacity: 0; }
+}
+
+@keyframes floatPath16 {
+  0% { transform: translate(90vw, -20vh) rotate(-5deg); opacity: 0; }
+  10% { opacity: 0.85; }
+  90% { opacity: 0.85; }
+  100% { transform: translate(60vw, 120vh) rotate(7deg); opacity: 0; }
+}
+
+.float-path-1 { animation: floatPath1 22s linear infinite; animation-delay: -2s; }
+.float-path-2 { animation: floatPath2 26s linear infinite; animation-delay: -14s; }
+.float-path-3 { animation: floatPath3 24s linear infinite; animation-delay: -8s; }
+.float-path-4 { animation: floatPath4 20s linear infinite; animation-delay: -5s; }
+.float-path-5 { animation: floatPath5 28s linear infinite; animation-delay: -18s; }
+.float-path-6 { animation: floatPath6 23s linear infinite; animation-delay: -11s; }
+.float-path-7  { animation: floatPath7  25s linear infinite; animation-delay: -3s;  }
+.float-path-8  { animation: floatPath8  27s linear infinite; animation-delay: -16s; }
+.float-path-9  { animation: floatPath9  21s linear infinite; animation-delay: -9s;  }
+.float-path-10 { animation: floatPath10 29s linear infinite; animation-delay: -20s; }
+.float-path-11 { animation: floatPath11 24s linear infinite; animation-delay: -6s;  }
+.float-path-12 { animation: floatPath12 26s linear infinite; animation-delay: -12s; }
+.float-path-13 { animation: floatPath13 22s linear infinite; animation-delay: -17s; }
+.float-path-14 { animation: floatPath14 28s linear infinite; animation-delay: -4s;  }
+.float-path-15 { animation: floatPath15 23s linear infinite; animation-delay: -10s; }
+.float-path-16 { animation: floatPath16 25s linear infinite; animation-delay: -19s; }

@@ -8,9 +8,10 @@ const LetterEnd = {
 };
 
 LetterEnd.dialogQueue = [
-  { emotion: "thinking", message: "Udah sampai bagian terakhir suratnya nih..." },
-  { emotion: "apologizing", message: "Aku jadi agak deg-degan mau nanya ini." },
-  { emotion: "hopeful", message: "Kamu masih mau lanjut ke tahap berikutnya, atau mau baca-baca lagi dulu?" },
+  { emotion: "thinking", message: "udah sampai bagian terakhir suratnya nih..." },
+  { emotion: "apologizing", message: "aku abis ini mau tanya tanya ke kamuu..." },
+  { emotion: "thinking", message: "jawab sesuai keadaan kamu sekarang yaah..." },
+  { emotion: "hopeful", message: "kamu mau lanjut ke pertanyaanku? atau mau baca-baca lagi dulu?" },
 ];
 
 LetterEnd.init = function () {

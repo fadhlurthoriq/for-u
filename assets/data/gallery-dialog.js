@@ -6,7 +6,7 @@ const GalleryDialog={
 
             emotion:"happy",
 
-            message:"Halooo ❤️"
+            message:"halooo ❤️"
 
         },
 
@@ -14,7 +14,7 @@ const GalleryDialog={
 
             emotion:"love",
 
-            message:"Selamat datang di tempat kecil yang aku simpan buat kita."
+            message:"selamat datang di tempat kecil yang aku simpan buat kita."
 
         },
 
@@ -22,7 +22,7 @@ const GalleryDialog={
 
             emotion:"super_excited",
 
-            message:"Di sini ada banyak kenangan kita."
+            message:"di sini ada banyak kenangan kita."
 
         },
 
@@ -30,7 +30,7 @@ const GalleryDialog={
 
             emotion:"love",
 
-            message:"Pelan-pelan ya lihatnya hehe ❤️"
+            message:"pelan-pelan ya lihatnya hehe ❤️"
 
         }
 
@@ -72,148 +72,13 @@ const GalleryDialog={
 
     ],
 
-    gallery:[
-        {
-            emotion:"happy",
-            message:"Hehe... kita mulai dari sini ya ❤️"
-        }
-    ],
-
-    idleLong:[
-
-        {
-
-            emotion:"sad",
-
-            message:"Kok diem ajaa 🥺"
-
-        },
-
-        {
-
-            emotion:"cry",
-
-            message:"Masih dibaca ya?"
-
-        },
-
-        {
-
-            emotion:"love",
-
-            message:"Gapapa kok, aku temenin ❤️"
-
-        }
-
-    ],
-
-    swipe:[
-
-        {
-
-            emotion:"happy",
-
-            message:"Yuk lanjut."
-
-        },
-
-        {
-
-            emotion:"super_excited",
-
-            message:"Foto berikutnyaaa!"
-
-        },
-
-        {
-
-            emotion:"love",
-
-            message:"Yang ini lucuu."
-
-        }
-
-    ],
-
-    popupClose:[
-
-        {
-
-            emotion:"happy",
-
-            message:"Yuk lanjut lagi ❤️"
-
-        },
-
-        {
-
-            emotion:"love",
-
-            message:"Masih banyak nih."
-
-        }
-
-    ],
-
-    firstPhoto:[
-
-        {
-
-            emotion:"love",
-
-            message:"Ini foto pertama kita ❤️"
-
-        }
-
-    ],
-
-    lastPhoto:[
-
-        {
-
-            emotion:"happy",
-
-            message:"Udah sampai foto terakhir."
-
-        },
-
-        {
-
-            emotion:"love",
-
-            message:"Tapi perjalanan kita belum selesai ❤️"
-
-        }
-
-    ],
-
-    rare:[
-
-        {
-
-            emotion:"love",
-
-            message:"Makasih ya udah balik lagi ke sini ❤️"
-
-        },
-
-        {
-
-            emotion:"happy",
-
-            message:"Aku seneng kamu masih buka ini."
-
-        }
-
-    ],
-
     next:[
 
         {
 
             emotion:"happy",
 
-            message:"Hehe, lanjut yaa ❤️"
+            message:"hehe, lanjut yaa ❤️"
 
         },
 
@@ -221,7 +86,7 @@ const GalleryDialog={
 
             emotion:"thinking",
 
-            message:"Foto berikutnya nih..."
+            message:"foto berikutnya nih..."
 
         }
 

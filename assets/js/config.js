@@ -2,7 +2,7 @@ const CONFIG = {
 
     login: {
 
-        username: "ney",
+        username: "neysilla dwi carollina",
 
         password: "27112025"
 
@@ -24,7 +24,6 @@ const CONFIG = {
         { src: "assets/music/bergema-selamanya.mp3", title: "Bergema Sampai Selamanya", artist: "Nadhif Basalamah", cover: "assets/img/covers/bergema.jpg" },
         { src: "assets/music/penjaga-hati.mp3", title: "Penjaga Hati", artist: "Nadhif Basalamah", cover: "assets/img/covers/penjaga.jpg" },
         { src: "assets/music/starla.mp3", title: "Surat Cinta untuk Starla", artist: "Virgoun", cover: "assets/img/covers/starla.png" },
-        
     ]
 
 };

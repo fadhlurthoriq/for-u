@@ -6,9 +6,10 @@ const QuestionEnd = {
 };
 
 QuestionEnd.dialogQueue = [
-  { emotion: "thinking", message: "Makasih ya udah jawab semua pertanyaannya 🥹" },
-  { emotion: "love", message: "Jawaban kamu bikin aku makin sayang deh." },
-  { emotion: "celebration", message: "Yuk, ada satu hal terakhir yang mau aku kasih liat 🎉" },
+  { emotion: "thinking", message: "makasih ya udah jawab semua pertanyaannya 🥹" },
+  { emotion: "love", message: "jawaban kamu bikin aku makin sayang deh." },
+  { emotion: "guilty", message:"maaf yaah sayaang, aku selalu sayang kamu"},
+  { emotion: "celebration", message: "yuk, ada satu hal terakhir yang mau aku kasih liat 🎉" },
 ];
 
 QuestionEnd.init = function () {

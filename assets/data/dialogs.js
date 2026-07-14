@@ -4,42 +4,42 @@ const Dialogs = {
 
         intro:{
             emotion:"waving",
-            message:"Haiii! Kenalin aku Mochi 🐱❤️ Aku yang nemenin kamu disini gantiin thoriq sementara yaah...",
+            message:"haiii! kenalin aku Mochi 🐱❤️ aku yang nemenin kamu disini gantiin thoriq sementara yaah...",
         },
 
         focusUsername:{
             emotion:"happy",
-            message:"Aku tunggu nama kamu yaa ❤️"
+            message:"tulis nama lengkap kamu yaa 😉"
         },
 
         focusPassword:{
             emotion:"thinking",
-            message:"Sekarang tanggal pertama kita bertemu 🤍"
+            message:"inget ngga tanggal berapa kita pertama kenal?? 🥺"
         },
 
         usernameCorrect:{
             emotion:"love",
-            message:"Iyaaa ❤️ itu nama kamu."
+            message:"haii sayaang 😊"
         },
 
         usernameWrong:{
             emotion:"angry",
-            message:"Heii itu bukan nama cewe akuu 😤"
+            message:"heii kamu siapaa?? itu bukan nama cewe akuu 😤"
         },
 
         passwordCorrect:{
             emotion:"love",
-            message:"Yeyyy ❤️ kamu masih ingat."
+            message:"yeyy ❤️ kamu masih ingat, makasii "
         },
 
         passwordWrong:{
-            emotion:"cry",
-            message:"Hmmm... coba diingat lagi yaa 🥺"
+            emotion:"guilty",
+            message:"ihh kamu lupa yaa, sediih 🥺"
         },
 
         loginSuccess:{
             emotion:"love",
-            message:"Yeyyy ❤️ Selamat datang."
+            message:"welcome lovee 😚"
         },
 
     },
@@ -48,17 +48,17 @@ const Dialogs = {
 
         intro:{
             emotion:"happy",
-            message:"Psst... ❤️"
+            message:"psst... ❤️"
         },
 
         envelope:{
             emotion:"thinking",
-            message:"Aku punya sesuatu buat kamu..."
+            message:"aku punya sesuatu nih buat kamu..."
         },
 
         open:{
             emotion:"super_excited",
-            message:"Coba buka surat kecil ini yaa ❤️"
+            message:"coba buka surat kecil ini yaa ❤️"
         }
 
     },
@@ -67,17 +67,17 @@ const Dialogs = {
 
         intro:{
             emotion: "love",
-            message: "Taraaa ❤️",
+            message: "taraaa ❤️",
         },
 
         mid:{
             emotion: "thinking",
-            message: "Hehe... ❤️",
+            message: "hehehee... ❤️",
         },
 
         end:{
             emotion: "love",
-            message: "Aku bikin ini khusus buat kamu ❤️",
+            message: "aku bikin ini khusus buat kamu ❤️",
         },
     },
 
@@ -85,12 +85,12 @@ const Dialogs = {
 
         start:{
             emotion:"love",
-            message:"Perjalanan kita dimulai ❤️"
+            message:"perjalanan kita dimulai ❤️"
         },
 
         gallery:{
             emotion:"happy",
-            message:"Hehe... kita mulai dari sini ya ❤️"
+            message:"hehe... kita mulai dari sini ya ❤️"
         }
 
     },

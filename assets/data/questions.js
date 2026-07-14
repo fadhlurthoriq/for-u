@@ -1,22 +1,23 @@
 const QuestionData = [
   {
-    question: "Menurut kamu, siapa yang lebih sering telat balas chat?",
-    options: ["Aku", "Kamu", "Sama-sama sering", "Gak ada yang telat 😌"],
-    mochiDialog: { emotion: "thinking", message: "Hmm, menurut kamu gimana nih? 🤔" }
+    type: "emoji",
+    question: "Neyy, do u still love me",
+    mochiDialog: { emotion: "shy", message: "jawab jujur ya, aku beneran mau tau 🙈" },
+    options: [
+      { id: 1, emoji: "😐", label: "NOO NOO" },
+      { id: 2, emoji: "🤔", label: "Little" },
+      { id: 3, emoji: "🙂", label: "I think yes" },
+      { id: 4, emoji: "😊", label: "Yeah" },
+      { id: 5, emoji: "🥰", label: "OF COURSE YESS" }
+    ]
   },
   {
-    question: "Kalau lagi jalan bareng, kamu maunya kemana?",
-    options: ["Nonton bioskop", "Makan enak", "Jalan santai aja"],
-    mochiDialog: { emotion: "happy", message: "Ih seru nih, pilih yang paling kamu mau ya! 🎉" }
-  },
-  {
-    question: "Menurutmu aku ini orangnya gimana sih?",
-    options: ["Lucu", "Perhatian", "Berisik tapi baik", "Semuanya bener 😆"],
-    mochiDialog: { emotion: "shy", message: "Eh jangan boong-boong jawabnya ya 🙈" }
-  },
-  {
-    question: "Kalau boleh milih 1 tempat buat liburan bareng, kamu pilih?",
-    options: ["Gunung", "Pantai", "Kota lain"],
-    mochiDialog: { emotion: "love", message: "Aku ikut kemanapun kamu pilih kok ❤️" }
+    type: "yesno",
+    question: "Maafin aku ya sayaang buat semua kesalahanku. Mau lanjut atau berhenti, aku terima pilihan kamu..",
+    mochiDialog: { emotion: "hopeful", message: "maaf yaa sedikit kuusilin hehe.." },
+    options: {
+      yes: "Iya kumaafin, tapi jgn gitu lagi",
+      no: "Gak kumaafin"
+    }
   }
 ];
